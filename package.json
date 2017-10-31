@@ -1,0 +1,22 @@
+{
+  "name": "interactive-ssm-results",
+  "version": "1.0.0",
+  "description": "Explore the results of the same-sex marriage postal survey.",
+  "license": "MIT",
+  "private": true,
+  "contributors": [
+    "Colin Gourlay <Gourlay.Colin@abc.net.au>",
+    "Andrew Kesper <Kesper.Andrew@abc.net.au>"
+  ],
+  "aunty": "react-app",
+  "scripts": {
+    "start": "aunty serve"
+  },
+  "devDependencies": {
+    "@abcnews/aunty": "^7.0.0"
+  },
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  }
+}
