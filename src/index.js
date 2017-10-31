@@ -6,7 +6,7 @@ const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
 
 function init() {
   const App = require('./components/App');
-  render(<App projectName={PROJECT_NAME} />, root);
+  render(<App dataURL={`${__webpack_public_path__}data.json`} />, root);
 }
 
 init();

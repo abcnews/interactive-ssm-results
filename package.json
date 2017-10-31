@@ -16,7 +16,9 @@
     "@abcnews/aunty": "^7.0.0"
   },
   "dependencies": {
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "xhr": "^2.4.0"
   }
 }
