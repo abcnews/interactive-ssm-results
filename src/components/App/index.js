@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const xhr = require('xhr');
+const Bar = require('../Bar');
 const Card = require('../Card');
 const styles = require('./styles.scss');
 
@@ -28,6 +29,7 @@ class App extends React.Component {
       <div className={styles.root}>
         <Card>
           <h4>{this.state.title}</h4>
+          <Bar value={this.state.value} tall />
         </Card>
       </div>
     );
