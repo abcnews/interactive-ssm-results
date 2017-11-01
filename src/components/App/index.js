@@ -6,7 +6,7 @@ const Card = require('../Card');
 const Integer = require('../Integer');
 const Percentage = require('../Percentage');
 const Sides = require('../Sides');
-const Waffle = require('../Waffle');
+const WaffleGrid = require('../WaffleGrid');
 const styles = require('./styles.scss');
 
 class App extends React.Component {
@@ -34,7 +34,7 @@ class App extends React.Component {
     return (
       <div className={styles.root}>
         <Card>
-          <h4>{this.state.title}</h4>
+          <h3>{this.state.title}</h3>
           <Bar value={this.state.yes / (this.state.yes + this.state.no)} large />
           <Sides>
             <div>
@@ -46,7 +46,20 @@ class App extends React.Component {
               <Integer value={this.state.no} units="votes" no large />
             </div>
           </Sides>
-          <Waffle label="Yes" value={this.state.yes} total={this.state.yes + this.state.no} />
+          <h4>Who returned their ballot?</h4>
+          <WaffleGrid
+            waffles={[
+              { label: 'Yes', value: this.state.yes, total: this.state.yes + this.state.no },
+              { label: 'No', value: this.state.no, total: this.state.yes + this.state.no },
+              { label: 'Yes', value: this.state.yes, total: this.state.yes + this.state.no },
+              { label: 'No', value: this.state.no, total: this.state.yes + this.state.no },
+              { label: 'Yes', value: this.state.yes, total: this.state.yes + this.state.no },
+              { label: 'No', value: this.state.no, total: this.state.yes + this.state.no },
+              { label: 'Yes', value: this.state.yes, total: this.state.yes + this.state.no },
+              { label: 'No', value: this.state.no, total: this.state.yes + this.state.no },
+              { label: 'Yes', value: this.state.yes, total: this.state.yes + this.state.no }
+            ]}
+          />
         </Card>
       </div>
     );

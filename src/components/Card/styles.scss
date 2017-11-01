@@ -5,6 +5,12 @@
   box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.15);
   background-color: #fff;
 
+  > h4 {
+    margin-bottom: 1.5rem;
+    font-size: 0.9375rem;
+    text-align: center;
+  }
+
   > :first-child {
     margin-top: 0;
   }
