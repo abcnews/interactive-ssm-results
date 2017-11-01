@@ -1,4 +1,57 @@
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<div data-interactive-ssm-results-root></div>
-<script src="index.js"></script>
+<!doctype html>
+<html land="en-AU">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+  <link rel="stylesheet" href="http://www.abc.net.au/res/sites/news-projects/odyssey/2.15.0/index.css" />
+</head>
+
+<body class="platform-mobile">
+  <header>
+    <nav id="abcHeader" class="global"></nav>
+  </header>
+  <div class="content">
+    <article>
+      <header>
+        <h1>SSM results</h1>
+        <span class="attribution richtext">By
+          <a href="#" target="_self" title="">Colin Gourlay</a>
+          and
+          <a href="#" target="_self" title="">Andrew Kesper</a>
+        </span>
+        <time class="updated" datetime="2017-11-01T09:00+11:00">
+          <small>Updated</small> Wed 1 Nov 2017, 9:00 AM AEDT
+        </time>
+      </header>
+      <div class="story richtext">
+        <div class="embed-fragment">
+          <div data-interactive-ssm-results-root></div>
+        </div>
+      </div>
+    </article>
+  </div>
+  <script>
+    (function (w, d, t, a) {
+      w.onload = function () {
+        var ls = d.getElementsByTagName(t)[0];
+        a.forEach(function (src) {
+          var s = document.createElement(t);
+          s.async = true;
+          s.src = src;
+          ls.parentNode.insertBefore(s, ls);
+        });
+      };
+    }(window, document, 'script', [
+      'http://www.abc.net.au/res/sites/news-projects/odyssey/2.15.0/index.js',
+      'index.js'
+    ]));
+  </script>
+</body>
+
+</html>
