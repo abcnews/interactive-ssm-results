@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const xhr = require('xhr');
+const Card = require('../Card');
 const styles = require('./styles.scss');
 
 class App extends React.Component {
@@ -25,7 +26,9 @@ class App extends React.Component {
   render() {
     return (
       <div className={styles.root}>
-        <h1>{this.state.title}</h1>
+        <Card>
+          <h4>{this.state.title}</h4>
+        </Card>
       </div>
     );
   }
