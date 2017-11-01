@@ -6,6 +6,7 @@ const Card = require('../Card');
 const Integer = require('../Integer');
 const Percentage = require('../Percentage');
 const Sides = require('../Sides');
+const Waffle = require('../Waffle');
 const styles = require('./styles.scss');
 
 class App extends React.Component {
@@ -45,6 +46,7 @@ class App extends React.Component {
               <Integer value={this.state.no} units="votes" no large />
             </div>
           </Sides>
+          <Waffle label="Yes" value={this.state.yes} total={this.state.yes + this.state.no} />
         </Card>
       </div>
     );

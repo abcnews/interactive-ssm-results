@@ -1,0 +1,40 @@
+@import '../../constants.scss';
+
+.root {
+  margin-bottom: 0.75rem;
+
+  > svg {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.8125rem;
+  text-align: center;
+}
+
+.labelBold {
+  composes: label;
+
+  font-weight: bold;
+}
+
+.cell {
+  stroke: none;
+  fill: none;
+}
+
+.cellEmpty {
+  composes: cell;
+
+  stroke: #ccc;
+}
+
+.cellFilled {
+  composes: cell;
+
+  fill: #333;
+}
