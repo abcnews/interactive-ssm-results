@@ -24,7 +24,6 @@ class App extends React.Component {
   fetchData() {
     xhr({ json: true, url: this.props.dataURL }, (err, response, body) => {
       if (!err) {
-        console.log(body);
         this.setState(body);
       }
     });
