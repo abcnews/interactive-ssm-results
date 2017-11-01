@@ -2,9 +2,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  margin: 0 auto;
+  max-width: 30rem;
 
   & > * {
     margin: 0 0.5rem 1rem;
-    max-width: 24.375%;
+    max-width: 24.455%;
   }
 }
