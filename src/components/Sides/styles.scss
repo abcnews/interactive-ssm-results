@@ -1,0 +1,8 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+
+  & > :last-child {
+    text-align: right;
+  }
+}

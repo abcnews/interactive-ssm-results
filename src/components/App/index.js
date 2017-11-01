@@ -3,6 +3,7 @@ const React = require('react');
 const xhr = require('xhr');
 const Bar = require('../Bar');
 const Card = require('../Card');
+const Sides = require('../Sides');
 const styles = require('./styles.scss');
 
 class App extends React.Component {
@@ -29,7 +30,11 @@ class App extends React.Component {
       <div className={styles.root}>
         <Card>
           <h4>{this.state.title}</h4>
-          <Bar value={this.state.value} tall />
+          <Bar value={this.state.value} large />
+          <Sides>
+            <div>Left</div>
+            <div>Right</div>
+          </Sides>
         </Card>
       </div>
     );
