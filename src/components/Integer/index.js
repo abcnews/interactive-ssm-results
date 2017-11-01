@@ -2,7 +2,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const styles = require('./styles.scss');
 
-const SIZES = [[1e6, 2, 'million', 'm'], [1e3, 2, 'thousand', 'k']];
+const SIZES = [[1e6, 2, 'million', 'm'], [1e3, 1, 'thousand', 'k']];
 
 const Integer = ({ value, units, yes, no, large }) => {
   let divisor = 1;
