@@ -13,11 +13,11 @@ const Bar = ({ value, max, tall }) => {
 Bar.propTypes = {
   value: PropTypes.number,
   max: PropTypes.number,
-  tall: PropTypes.boolean
+  tall: PropTypes.bool
 };
 
 Bar.defaultProps = {
-  value: 0,
+  value: 0.5,
   max: 1,
   tall: false
 };
