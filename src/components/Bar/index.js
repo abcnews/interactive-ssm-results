@@ -2,9 +2,9 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const styles = require('./styles.scss');
 
-const Bar = ({ value, max, tall }) => {
+const Bar = ({ value, max, large }) => {
   return (
-    <div className={styles[tall ? 'tall' : 'normal']} role="presesntation">
+    <div className={styles[large ? 'large' : 'normal']} role="presesntation">
       <progress value={value} max={max} />
     </div>
   );
@@ -13,13 +13,13 @@ const Bar = ({ value, max, tall }) => {
 Bar.propTypes = {
   value: PropTypes.number,
   max: PropTypes.number,
-  tall: PropTypes.bool
+  large: PropTypes.bool
 };
 
 Bar.defaultProps = {
   value: 0.5,
   max: 1,
-  tall: false
+  large: false
 };
 
 module.exports = Bar;
