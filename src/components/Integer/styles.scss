@@ -1,0 +1,27 @@
+@import '../../constants.scss';
+
+.root {
+  color: $color-text;
+}
+
+.rootYes {
+  composes: root;
+
+  color: $color-text-yes;
+}
+
+.rootNo {
+  composes: root;
+
+  color: $color-text-no;
+}
+
+.text {
+  font-size: 0.6875rem;
+}
+
+.textLarge {
+  composes: text;
+
+  font-size: 0.75rem;
+}

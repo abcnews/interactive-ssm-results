@@ -4,7 +4,7 @@ const styles = require('./styles.scss');
 
 const Bar = ({ value, max, large }) => {
   return (
-    <div className={styles[large ? 'large' : 'normal']} role="presesntation">
+    <div className={styles[`root${large ? 'Large' : ''}`]} role="presesntation">
       <progress value={value} max={max} />
     </div>
   );
