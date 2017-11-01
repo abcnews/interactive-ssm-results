@@ -3,10 +3,11 @@ const { render } = require('react-dom');
 
 const PROJECT_NAME = 'interactive-ssm-results';
 const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
+const dataURL = root.getAttribute('data-url');
 
 function init() {
   const App = require('./components/App');
-  render(<App dataURL={`${__webpack_public_path__}data.json`} />, root);
+  render(<App dataURL={dataURL} />, root);
 }
 
 init();
