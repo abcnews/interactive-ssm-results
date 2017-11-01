@@ -7,22 +7,25 @@ const SIZES = [[1e6, 2, 'million', 'm'], [1e3, 2, 'thousand', 'k']];
 const Integer = ({ value, units, yes, no, large }) => {
   let divisor = 1;
   let digits;
-  let label;
+  let sizeLabel;
 
   for (let size of SIZES) {
     if (Math.abs(value) >= size[0]) {
       divisor = size[0];
       digits = size[1];
-      label = size[large ? 2 : 3];
+      sizeLabel = size[large ? 2 : 3];
 
       break;
     }
   }
 
+  const prefix = yes ? 'Yes' : no ? 'No' : '';
+  const label = `${prefix ? `${prefix}: ` : ''}${value}${units ? ` ${units}` : ''}`;
+
   return (
-    <div aria-label={`${value}${units ? ` ${units}` : ''}`} className={styles[`root${yes ? 'Yes' : no ? 'No' : ''}`]}>
+    <div aria-label={label} className={styles[`root${prefix}`]}>
       <span aria-hidden="true" className={styles[`text${large ? 'Large' : ''}`]}>
-        {`${(value / divisor).toFixed(digits)}${label ? ` ${label}` : ''}${units ? ` ${units}` : ''}`}
+        {`${(value / divisor).toFixed(digits)}${sizeLabel ? ` ${sizeLabel}` : ''}${units ? ` ${units}` : ''}`}
       </span>
     </div>
   );
