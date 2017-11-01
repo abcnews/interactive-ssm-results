@@ -39,16 +39,20 @@
     (function (w, d, t, a) {
       w.onload = function () {
         var ls = d.getElementsByTagName(t)[0];
-        a.forEach(function (src) {
+        a.forEach(function (x) {
           var s = document.createElement(t);
+          if (x.length > 1) {
+            s.setAttribute(x[1] ? 'type' : 'nomodule', x[1] ? 'module' : '');
+          }
           s.async = true;
-          s.src = src;
+          s.src = x[0];
           ls.parentNode.insertBefore(s, ls);
         });
       };
     }(window, document, 'script', [
-      'http://www.abc.net.au/res/sites/news-projects/odyssey/2.15.0/index.js',
-      'index.js'
+      ['http://www.abc.net.au/res/sites/news-projects/odyssey/2.15.0/index.js'],
+      ['index.modules.js', true],
+      ['index.js', false]
     ]));
   </script>
 </body>
