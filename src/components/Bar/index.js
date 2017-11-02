@@ -2,13 +2,11 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const styles = require('./styles.scss');
 
-const Bar = ({ value, max, large }) => {
-  return (
-    <div className={styles[`root${large ? 'Large' : ''}`]} role="presesntation">
-      <progress value={value} max={max} />
-    </div>
-  );
-};
+const Bar = ({ value, max, large }) => (
+  <div className={styles[`root${large ? 'Large' : ''}`]} role="presesntation">
+    <progress value={value} max={max} />
+  </div>
+);
 
 Bar.propTypes = {
   value: PropTypes.number,
