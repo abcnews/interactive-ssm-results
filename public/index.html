@@ -30,27 +30,19 @@
       </header>
       <div class="story richtext">
         <div class="embed-fragment">
-          <div data-interactive-ssm-results-root data-url="data.json"></div>
+          <div class="init-interactive" data-no-support-msg="true" data-scripts="index.js" data-interactive-ssm-results-root data-url="data.json"></div>
+        </div>
+        <div class="embed-fragment">
+          <div class="init-interactive" data-no-support-msg="true" data-scripts="http://www.abc.net.au/res/sites/news-projects/odyssey/2.15.0/index.js"></div>
         </div>
       </div>
     </article>
   </div>
-  <script>
-    (function (w, d, t, a) {
-      w.onload = function () {
-        var ls = d.getElementsByTagName(t)[0];
-        a.forEach(function (x) {
-          var s = document.createElement(t);
-          s.async = true;
-          s.src = x;
-          ls.parentNode.insertBefore(s, ls);
-        });
-      };
-    }(window, document, 'script', [
-      'http://www.abc.net.au/res/sites/news-projects/odyssey/2.15.0/index.js',
-      'index.js'
-    ]));
-  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="http://www.abc.net.au/res/libraries/location/abc.location-1.latest.min.js"></script>
+  <script src="http://www.abc.net.au/res/bundles/mobile/abc.bundle.mobile-1.0.1.min.js"></script>
+  <script src="http://www.abc.net.au/res/bundles/mobile/abc.bundle.mobile.media-1.0.min.js"></script>
+  <script src="http://www.abc.net.au/res/sites/news/scripts/min/abc.news.mobile.js?2017-10-26"></script>
 </body>
 
 </html>
