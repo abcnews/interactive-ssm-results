@@ -13,7 +13,7 @@
     "start": "aunty serve"
   },
   "devDependencies": {
-    "@abcnews/aunty": "^7.0.0"
+    "@abcnews/aunty": "^7.1.1"
   },
   "dependencies": {
     "classnames": "^2.2.5",
