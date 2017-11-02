@@ -14,25 +14,20 @@
   text-align: center;
 }
 
-.labelBold {
-  composes: label;
-
+.bold {
   font-weight: bold;
 }
 
-.cell {
-  stroke: none;
+.empty {
+  stroke: #ccc;
   fill: none;
 }
 
-.cellEmpty {
-  composes: cell;
-
-  stroke: #ccc;
+.filled {
+  stroke: none;
+  fill: #555;
 }
 
-.cellFilled {
-  composes: cell;
-
+.darker {
   fill: #333;
 }

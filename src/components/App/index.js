@@ -35,7 +35,7 @@ class App extends React.Component {
     return (
       <div className={styles.root}>
         <Card>
-          <Text heading={4} visualHeading={3} nomargin>
+          <Text heading={4} headingStyle={3} nomargin>
             {this.state.title}
           </Text>
           <Bar value={this.state.yes / (this.state.yes + this.state.no)} large />

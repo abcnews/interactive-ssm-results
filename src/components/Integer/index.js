@@ -1,6 +1,9 @@
+const classNames = require('classnames/bind');
 const PropTypes = require('prop-types');
 const React = require('react');
 const styles = require('./styles.scss');
+
+const cx = classNames.bind(styles);
 
 const SIZES = [[1e6, 2, 'million', 'm'], [1e3, 1, 'thousand', 'k']];
 
@@ -23,8 +26,8 @@ const Integer = ({ value, units, yes, no, large }) => {
   const label = `${prefix ? `${prefix}: ` : ''}${value}${units ? ` ${units}` : ''}`;
 
   return (
-    <div aria-label={label} className={styles[`root${prefix}`]}>
-      <span aria-hidden="true" className={styles[`text${large ? 'Large' : ''}`]}>
+    <div aria-label={label} className={cx('root', { yes, no, large })}>
+      <span aria-hidden="true">
         {`${(value / divisor).toFixed(digits)}${sizeLabel ? ` ${sizeLabel}` : ''}${units ? ` ${units}` : ''}`}
       </span>
     </div>

@@ -1,9 +1,12 @@
+const classNames = require('classnames/bind');
 const PropTypes = require('prop-types');
 const React = require('react');
 const styles = require('./styles.scss');
 
-const Bar = ({ value, max, large }) => (
-  <div className={styles[`root${large ? 'Large' : ''}`]} role="presesntation">
+const cx = classNames.bind(styles);
+
+const Bar = ({ value, max, large, prediction }) => (
+  <div className={cx('root', { large, prediction })} role="presesntation">
     <progress value={value} max={max} />
   </div>
 );
@@ -11,13 +14,15 @@ const Bar = ({ value, max, large }) => (
 Bar.propTypes = {
   value: PropTypes.number,
   max: PropTypes.number,
-  large: PropTypes.bool
+  large: PropTypes.bool,
+  prediction: PropTypes.bool
 };
 
 Bar.defaultProps = {
   value: 0.5,
   max: 1,
-  large: false
+  large: false,
+  prediction: false
 };
 
 module.exports = Bar;

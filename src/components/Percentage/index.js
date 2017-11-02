@@ -1,6 +1,9 @@
+const classNames = require('classnames/bind');
 const PropTypes = require('prop-types');
 const React = require('react');
 const styles = require('./styles.scss');
+
+const cx = classNames.bind(styles);
 
 const Percentage = ({ value, digits, yes, no, large }) => {
   const pct = (value * 100).toFixed(digits);
@@ -8,8 +11,8 @@ const Percentage = ({ value, digits, yes, no, large }) => {
   const label = `${prefix ? `${prefix}: ` : ''}${pct} per cent`;
 
   return (
-    <div aria-label={label} className={styles[`root${prefix}`]}>
-      <span aria-hidden="true" className={styles[`text${large ? 'Large' : ''}`]}>
+    <div aria-label={label} className={cx('root', { yes, no, large })}>
+      <span aria-hidden="true">
         {prefix} {pct}
         {'%'}
       </span>

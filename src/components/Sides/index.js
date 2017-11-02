@@ -1,9 +1,7 @@
 const React = require('react');
 const styles = require('./styles.scss');
 
-const Sides = ({ children }) => {
-  return <div className={styles.root}>{children}</div>;
-};
+const Sides = ({ children }) => <div className={styles.root}>{children}</div>;
 
 Sides.propTypes = {
   children: (props, propName, componentName) => {
