@@ -8,6 +8,7 @@ const cx = classNames.bind(styles);
 const Bar = ({ value, max, large, prediction }) => (
   <div className={cx('root', { large, prediction })} role="presesntation">
     <progress value={value} max={max} />
+    <span className={styles.midpoint} />
   </div>
 );
 
