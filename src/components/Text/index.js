@@ -20,16 +20,16 @@ const Text = ({ heading, headingStyle, align, nomargin, children }) =>
   );
 
 Text.propTypes = {
-  heading: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
-  headingStyle: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
-  align: PropTypes.oneOf('left', 'right', 'center'),
+  heading: PropTypes.oneOf([null, 1, 2, 3, 4, 5, 6]),
+  headingStyle: PropTypes.oneOf([null, 1, 2, 3, 4, 5, 6]),
+  align: PropTypes.oneOf([null, 'left', 'right', 'center']),
   nomargin: PropTypes.bool
 };
 
 Text.defaultProps = {
   heading: null,
   headingStyle: null,
-  align: '',
+  align: null,
   nomargin: false
 };
 
