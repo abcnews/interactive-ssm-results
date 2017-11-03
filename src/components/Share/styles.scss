@@ -1,0 +1,55 @@
+@keyframes pop {
+  75% {
+    transform: scale(1.25);
+  }
+}
+
+.root {
+  margin-top: 0.5rem;
+  color: #757575;
+  font-size: 0.6875rem;
+
+  span {
+    position: relative;
+    top: 0.0675rem;
+  }
+
+  i {
+    display: inline-block;
+    margin-left: 0.25rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+  }
+
+  button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+
+    &:active {
+      outline: none;
+
+      & > i {
+        animation: pop 0.1s linear 1;
+      }
+    }
+  }
+}
+
+.twitter {
+  background-image: url(./twitter.svg);
+}
+
+.facebook {
+  background-image: url(./facebook.svg);
+}
+
+.copy {
+  background-image: url(./copy.svg);
+}

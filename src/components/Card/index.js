@@ -1,6 +1,10 @@
 const React = require('react');
 const styles = require('./styles.scss');
 
-const Card = ({ children }) => <div className={styles.root}>{children}</div>;
+const Card = ({ id, children }) => (
+  <div id={id} className={styles.root}>
+    {children}
+  </div>
+);
 
 module.exports = Card;

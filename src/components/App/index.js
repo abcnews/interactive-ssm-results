@@ -5,6 +5,7 @@ const Bar = require('../Bar');
 const Card = require('../Card');
 const Integer = require('../Integer');
 const Percentage = require('../Percentage');
+const Share = require('../Share');
 const Sides = require('../Sides');
 const Text = require('../Text');
 const WaffleGrid = require('../WaffleGrid');
@@ -34,7 +35,7 @@ class App extends React.Component {
   render() {
     return (
       <div className={styles.root}>
-        <Card>
+        <Card id="national">
           <Text heading={4} headingStyle={3} nomargin>
             {this.state.title}
           </Text>
@@ -49,6 +50,7 @@ class App extends React.Component {
               <Integer value={this.state.no} units="votes" no large />
             </div>
           </Sides>
+          <Share target="national" />
           <Text heading={4} align={'center'}>
             Who returned their ballot?
           </Text>
