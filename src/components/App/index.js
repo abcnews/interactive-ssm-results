@@ -3,6 +3,7 @@ const React = require('react');
 const xhr = require('xhr');
 const Bar = require('../Bar');
 const Card = require('../Card');
+const CardGrid = require('../CardGrid');
 const Integer = require('../Integer');
 const Percentage = require('../Percentage');
 const Share = require('../Share');
@@ -80,6 +81,91 @@ class App extends React.Component {
               </Text>
             </div>
           }
+        />
+        <CardGrid
+          cards={[
+            {
+              id: 'nsw',
+              top: (
+                <div>
+                  <Text heading={4} nomargin>
+                    NSW
+                  </Text>
+                  <Bar value={this.state.yes / (this.state.yes + this.state.no)} />
+                  <Sides>
+                    <div>
+                      <Percentage value={this.state.yes / (this.state.yes + this.state.no)} yes />
+                    </div>
+                    <div>
+                      <Percentage value={this.state.no / (this.state.yes + this.state.no)} no />
+                    </div>
+                  </Sides>
+                </div>
+              ),
+              middle: (
+                <Sides>
+                  <div>
+                    <Integer value={this.state.yes} units="votes" yes />
+                  </div>
+                  <div>
+                    <Integer value={this.state.no} units="votes" no />
+                  </div>
+                </Sides>
+              ),
+              bottom: (
+                <div>
+                  <Share target="nsw" />
+                  <Text heading={4} align={'center'}>
+                    Who returned their ballot?
+                  </Text>
+                  <WaffleGrid
+                    waffles={[
+                      { label: 'Yes', value: this.state.yes, total: this.state.yes + this.state.no },
+                      { label: 'No', value: this.state.no, total: this.state.yes + this.state.no },
+                      { label: 'Yes', value: this.state.yes, total: this.state.yes + this.state.no },
+                      { label: 'No', value: this.state.no, total: this.state.yes + this.state.no },
+                      { label: 'Yes', value: this.state.yes, total: this.state.yes + this.state.no },
+                      { label: 'No', value: this.state.no, total: this.state.yes + this.state.no },
+                      { label: 'Yes', value: this.state.yes, total: this.state.yes + this.state.no },
+                      { label: 'No', value: this.state.no, total: this.state.yes + this.state.no },
+                      { label: 'Yes', value: this.state.yes, total: this.state.yes + this.state.no }
+                    ]}
+                  />
+                  <Text>
+                    Stuff about what we think will happen in parliament. There is such a lot of talk going around about
+                    branding, but how do you use it to help you reach more people and market your products or services?
+                  </Text>
+                </div>
+              )
+            },
+            {
+              id: 'b',
+              top: (
+                <Text heading={4} nomargin>
+                  B
+                </Text>
+              ),
+              bottom: 'b-bottom'
+            },
+            {
+              id: 'c',
+              top: (
+                <Text heading={4} nomargin>
+                  C
+                </Text>
+              ),
+              bottom: 'c-bottom'
+            },
+            {
+              id: 'd',
+              top: (
+                <Text heading={4} nomargin>
+                  D
+                </Text>
+              ),
+              bottom: 'd-bottom'
+            }
+          ]}
         />
       </div>
     );

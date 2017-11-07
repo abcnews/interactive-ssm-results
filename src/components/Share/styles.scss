@@ -5,9 +5,12 @@
 }
 
 .root {
-  margin-top: 0.5rem;
   color: #757575;
   font-size: 0.6875rem;
+
+  &:not(:first-child) {
+    margin-top: 0.5rem;
+  }
 
   span {
     position: relative;

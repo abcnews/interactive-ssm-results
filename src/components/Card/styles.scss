@@ -1,33 +1,110 @@
+@keyframes inFromAbove {
+  from {
+    opacity: 0;
+    transform: translate(0, -0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .root {
   position: relative;
+  margin-bottom: 0.625rem;
   border: 0.0625rem solid rgba(0, 0, 0, 0.15);
   border-radius: 0.125rem;
-  padding: 0.75rem;
+  padding: 0.75rem 0.75rem 0.375rem;
   box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.15);
   background-color: #fff;
 
-  > :first-child,
-  > :first-child > :first-child {
+  > * > :first-child {
     margin-top: 0;
   }
 
-  > :last-child,
-  > :last-child > :last-child {
+  > * > :last-child {
     margin-bottom: 0;
   }
 }
 
+.open {
+}
+
+.bottomless {
+}
+
+.bottomless.open {
+  &::before {
+    content: '';
+    position: absolute;
+    top: calc(100% + 0.125rem);
+    left: -0.0625rem;
+    width: calc(100% + 0.125rem);
+    height: 0.5rem;
+    box-shadow: 0 0 0.125rem rgba(0, 0, 0, 0.15);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: -0.0625rem;
+    width: calc(100% + 0.125rem);
+    height: 0.75rem;
+    border-right: 0.0625rem solid rgba(0, 0, 0, 0.15);
+    border-left: 0.0625rem solid rgba(0, 0, 0, 0.15);
+    background-color: inherit;
+  }
+}
+
+.topless {
+  display: none;
+}
+
+.bottomless.open + .topless {
+  display: block;
+}
+
+.top {
+}
+
+.middle {
+  position: absolute;
+  z-index: 2;
+  top: calc(100% - 0.375rem);
+  left: 0.75rem;
+  width: calc(100% - 1.5rem);
+}
+
+.middle {
+  display: none;
+}
+
+.bottomless.open > .middle {
+  display: block;
+}
+
+.middle,
+.bottom {
+  animation: inFromAbove 0.5s;
+}
+
 .less,
 .more {
-  position: absolute;
-  top: 0;
-  left: 0;
   margin: 0;
   border: 0;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 0 0 0;
   width: 100%;
   background: none;
   text-align: right;
+
+  &:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.5rem 0.75rem;
+  }
 
   &:focus,
   &:active {
@@ -48,6 +125,11 @@
     outline: auto;
     outline: -webkit-focus-ring-color auto 5px;
   }
+}
+
+.less:last-child {
+  position: static;
+  padding: 0.5rem 0 0 0;
 }
 
 .less::after {
