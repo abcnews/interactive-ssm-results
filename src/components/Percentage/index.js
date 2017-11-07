@@ -29,7 +29,7 @@ Percentage.propTypes = {
 };
 
 Percentage.defaultProps = {
-  value: 0.5,
+  value: 0,
   digits: 0,
   yes: false,
   no: false,

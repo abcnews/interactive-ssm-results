@@ -45,7 +45,7 @@ Waffle.propTypes = {
 Waffle.defaultProps = {
   label: '',
   value: 0,
-  total: 1,
+  total: 0,
   bold: false
 };
 
