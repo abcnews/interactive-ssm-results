@@ -12,7 +12,7 @@ const RANGE = [...Array(100).keys()];
 
 const Waffle = ({ label, value, total, bold }) => {
   const pct = value / total;
-  const pctIndex = Math.round(pct * 100) - 1;
+  const pctIndex = pct ? Math.round(pct * 100) - 1 : -1;
   const cells = RANGE.map(index => (
     <circle
       key={index}
