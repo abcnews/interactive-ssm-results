@@ -73,32 +73,32 @@ class App extends React.Component {
           waffles={[
             { label: 'Total', value: TEMP_TURNOUT, total: TEMP_ELIGIBLE },
             {
-              label: '18-24',
+              label: '18 - 24 yrs',
               value: electorate.turnout_18to24_count,
               total: electorate.turnout_18to24_eligible
             },
             {
-              label: '25-34',
+              label: '25 - 34 yrs',
               value: electorate.turnout_25to34_count,
               total: electorate.turnout_25to34_eligible
             },
             {
-              label: '35-44',
+              label: '35 - 44 yrs',
               value: electorate.turnout_35to44_count,
               total: electorate.turnout_35to44_eligible
             },
             {
-              label: '45-54',
+              label: '45 - 54 yrs',
               value: electorate.turnout_45to54_count,
               total: electorate.turnout_45to54_eligible
             },
             {
-              label: '55-64',
+              label: '55 - 64 yrs',
               value: electorate.turnout_55to64_count,
               total: electorate.turnout_55to64_eligible
             },
             {
-              label: '65+',
+              label: '65 + yrs',
               value: electorate.turnout_65plus_count,
               total: electorate.turnout_65plus_eligible
             }
