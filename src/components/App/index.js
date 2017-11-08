@@ -1,14 +1,14 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const xhr = require('xhr');
-const { adjective, nowrap } = require('../../util');
+const { adjective } = require('../../util');
 const Abbreviation = require('../Abbreviation');
 const Card = require('../Card');
 const CardGrid = require('../CardGrid');
 const Result = require('../Result');
 const Share = require('../Share');
 const Text = require('../Text');
-const WaffleGrid = require('../WaffleGrid');
+const Turnout = require('../Turnout');
 const styles = require('./styles.scss');
 
 class App extends React.Component {
@@ -40,63 +40,6 @@ class App extends React.Component {
     return this.state.electorates.filter(electorate => electorate.electorate_level === level);
   }
 
-  renderTurnout(electorate) {
-    return (
-      <div>
-        <Text heading={4} align={'center'}>
-          {`Who returned their ballot${electorate.electorate_level !== 'national'
-            ? ` in ${nowrap(electorate.electorate_name)}`
-            : ''}?`}
-        </Text>
-        <WaffleGrid
-          waffles={[
-            { label: 'Total', value: electorate.turnout_total_count, total: electorate.turnout_total_eligible },
-            {
-              label: 'Male',
-              value: electorate.turnout_male_count,
-              total: electorate.turnout_male_eligible
-            },
-            {
-              label: 'Female',
-              value: electorate.turnout_female_count,
-              total: electorate.turnout_female_eligible
-            },
-            {
-              label: '18 - 24 yrs',
-              value: electorate.turnout_18to24_count,
-              total: electorate.turnout_18to24_eligible
-            },
-            {
-              label: '25 - 34 yrs',
-              value: electorate.turnout_25to34_count,
-              total: electorate.turnout_25to34_eligible
-            },
-            {
-              label: '35 - 44 yrs',
-              value: electorate.turnout_35to44_count,
-              total: electorate.turnout_35to44_eligible
-            },
-            {
-              label: '45 - 54 yrs',
-              value: electorate.turnout_45to54_count,
-              total: electorate.turnout_45to54_eligible
-            },
-            {
-              label: '55 - 64 yrs',
-              value: electorate.turnout_55to64_count,
-              total: electorate.turnout_55to64_eligible
-            },
-            {
-              label: '65 + yrs',
-              value: electorate.turnout_65plus_count,
-              total: electorate.turnout_65plus_eligible
-            }
-          ]}
-        />
-      </div>
-    );
-  }
-
   render() {
     return (
       <div className={styles.root}>
@@ -115,7 +58,7 @@ class App extends React.Component {
             }
             bottom={
               <div>
-                {this.renderTurnout(electorate)}
+                <Turnout electorate={electorate} />
                 <Text heading={4} align="center">
                   So what happens next?
                 </Text>
@@ -156,7 +99,7 @@ class App extends React.Component {
             bottom: (
               <div>
                 <Share target={electorate.electorate_id} />
-                {this.renderTurnout(electorate)}
+                <Turnout electorate={electorate} />
                 <Text heading={4} align="center">
                   {`Which ${adjective(electorate.electorate_name)} senators are likely to support same-sex marriage?`}
                 </Text>
@@ -181,7 +124,7 @@ class App extends React.Component {
               <div>
                 <Result electorate={electorate} integer />
                 <Share target={electorate.electorate_id} />
-                {this.renderTurnout(electorate)}
+                <Turnout electorate={electorate} />
               </div>
             }
           />
