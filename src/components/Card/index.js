@@ -25,6 +25,8 @@ class Card extends React.Component {
   }
 
   render() {
+    const open = this.props.onToggle ? this.props.open : this.state.open;
+
     return (
       <div
         id={this.props.id}
@@ -33,7 +35,7 @@ class Card extends React.Component {
           {
             topless: !this.props.top,
             bottomless: !this.props.bottom,
-            open: this.props.onToggle ? this.props.open : this.state.open
+            open
           },
           this.props.className
         )}
@@ -42,30 +44,26 @@ class Card extends React.Component {
         {this.props.top && (
           <div className={styles.top}>
             {this.props.id && (
-              <button
-                className={styles[(this.props.onToggle ? this.props.open : this.state.open) ? 'less' : 'more']}
-                onClick={this.toggle}
-              >
-                {this.state.open ? 'less' : 'more'}
+              <button className={styles[open ? 'less' : 'more']} onClick={this.toggle}>
+                {open ? 'less' : 'more'}
               </button>
             )}
             {this.props.top}
           </div>
         )}
-        {(this.props.middle && this.props.onToggle ? this.props.open : this.state.open) && (
-          <div className={styles.middle}>{this.props.middle}</div>
-        )}
-        {(this.props.bottom && this.props.onToggle ? this.props.open : this.state.open) && (
-          <div className={styles.bottom}>
-            {this.props.bottom}
-            {this.props.id &&
-              (this.props.onToggle ? this.props.open : this.state.open) && (
-                <button className={styles.less} onClick={this.toggle}>
-                  less
-                </button>
-              )}
-          </div>
-        )}
+        {this.props.middle && open && <div className={styles.middle}>{this.props.middle}</div>}
+        {this.props.bottom &&
+          open && (
+            <div className={styles.bottom}>
+              {this.props.bottom}
+              {this.props.id &&
+                open && (
+                  <button className={styles.less} onClick={this.toggle}>
+                    less
+                  </button>
+                )}
+            </div>
+          )}
       </div>
     );
   }
