@@ -43,18 +43,21 @@ class App extends React.Component {
     return this.state.electorates.filter(electorate => electorate.electorate_level === level);
   }
 
-  renderVotes(electorate, { bar = true, percentage = true, integer = true, large = false }) {
+  renderVotes(
+    electorate,
+    { bar = true, prediction = false, percentage = true, integer = true, large = false, units = 'votes' }
+  ) {
     return (
       <div>
-        {bar && <Bar value={electorate.response_yes_percentage} large={large} />}
+        {bar && <Bar value={electorate.response_yes_percentage} large={large} prediction={prediction} />}
         <Sides>
           <div>
             {percentage && <Percentage value={electorate.response_yes_percentage} yes large={large} />}
-            {integer && <Integer value={electorate.response_yes_count} units="votes" yes large={large} />}
+            {integer && <Integer value={electorate.response_yes_count} units={units} yes large={large} />}
           </div>
           <div>
             {percentage && <Percentage value={electorate.response_no_percentage} no large={large} />}
-            {integer && <Integer value={electorate.response_no_count} units="votes" no large={large} />}
+            {integer && <Integer value={electorate.response_no_count} units={units} no large={large} />}
           </div>
         </Sides>
       </div>
@@ -137,9 +140,26 @@ class App extends React.Component {
             bottom={
               <div>
                 {this.renderTurnout(electorate)}
-                <Text>
+                <Text heading={4} align="center">
+                  So what happens next?
+                </Text>
+                <Text todo>
                   Stuff about what we think will happen in parliament. There is such a lot of talk going around about
                   branding, but how do you use it to help you reach more people and market your products or services?
+                </Text>
+                <Text heading={5} headingStyle={4} nomargin>
+                  {this.state.houses[0].house_name}
+                </Text>
+                {this.renderVotes(this.state.houses[0], { prediction: true, units: 'members' })}
+                <br />
+                <Text heading={5} headingStyle={4} nomargin>
+                  {this.state.houses[1].house_name}
+                </Text>
+                {this.renderVotes(this.state.houses[1], { prediction: true, units: 'members' })}
+                <Text todo>
+                  More stuff about what we think will happen in parliament. There is such a lot of talk going around
+                  about branding, but how do you use it to help you reach more people and market your products or
+                  services?
                 </Text>
               </div>
             }
