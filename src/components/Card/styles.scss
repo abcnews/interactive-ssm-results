@@ -110,6 +110,10 @@
   animation: nudgeIn 0.5s backwards;
 }
 
+.top + .bottom {
+  margin-top: 1rem;
+}
+
 .topless > .bottom {
   animation-delay: 0.125s;
 }
