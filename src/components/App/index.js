@@ -16,6 +16,8 @@ const TEMP_YES = 6792673;
 const TEMP_TURNOUT = 12350315;
 const TEMP_ELIGIBLE = 16039370;
 
+const ENDS_IN_IA = /ia$/;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -151,6 +153,12 @@ class App extends React.Component {
               <div>
                 <Share target={electorate.electorate_id} />
                 {this.renderTurnout(electorate)}
+                <Text heading={4} align="center">
+                  {`Which ${electorate.electorate_name.replace(
+                    ENDS_IN_IA,
+                    'ian'
+                  )} senators are likely to support same-sex marriage?`}
+                </Text>
                 <Text>
                   Stuff about what we think will happen in parliament. There is such a lot of talk going around about
                   branding, but how do you use it to help you reach more people and market your products or services?
