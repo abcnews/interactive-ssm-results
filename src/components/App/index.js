@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const xhr = require('xhr');
+const { adjective, nowrap } = require('../../util');
 const Abbreviation = require('../Abbreviation');
 const Bar = require('../Bar');
 const Card = require('../Card');
@@ -12,8 +13,6 @@ const Sides = require('../Sides');
 const Text = require('../Text');
 const WaffleGrid = require('../WaffleGrid');
 const styles = require('./styles.scss');
-
-const ENDS_IN_IA = /ia$/;
 
 class App extends React.Component {
   constructor(props) {
@@ -66,7 +65,9 @@ class App extends React.Component {
     return (
       <div>
         <Text heading={4} align={'center'}>
-          Who returned their ballot?
+          {`Who returned their ballot${electorate.electorate_level !== 'national'
+            ? ` in ${nowrap(electorate.electorate_name)}`
+            : ''}?`}
         </Text>
         <WaffleGrid
           waffles={[
@@ -161,14 +162,7 @@ class App extends React.Component {
                 <Share target={electorate.electorate_id} />
                 {this.renderTurnout(electorate)}
                 <Text heading={4} align="center">
-                  {`Which ${electorate.electorate_name.replace(
-                    ENDS_IN_IA,
-                    'ian'
-                  )} senators are likely to support same-sex marriage?`}
-                </Text>
-                <Text>
-                  Stuff about what we think will happen in parliament. There is such a lot of talk going around about
-                  branding, but how do you use it to help you reach more people and market your products or services?
+                  {`Which ${adjective(electorate.electorate_name)} senators are likely to support same-sex marriage?`}
                 </Text>
               </div>
             )
@@ -192,10 +186,6 @@ class App extends React.Component {
                 {this.renderVotes(electorate, { bar: false, percentage: false })}
                 <Share target={electorate.electorate_id} />
                 {this.renderTurnout(electorate)}
-                <Text>
-                  Stuff about what we think will happen in parliament. There is such a lot of talk going around about
-                  branding, but how do you use it to help you reach more people and market your products or services?
-                </Text>
               </div>
             }
           />
