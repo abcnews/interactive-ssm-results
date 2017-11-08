@@ -6,9 +6,9 @@ const Percentage = require('../Percentage');
 const Sides = require('../Sides');
 
 const Result = ({ electorate, bar, prediction, percentage, integer, large, units }) => [
-  bar && <Bar value={electorate.response_yes_percentage} large={large} prediction={prediction} />,
+  bar && <Bar key="bar" value={electorate.response_yes_percentage} large={large} prediction={prediction} />,
   (percentage || integer) && (
-    <Sides>
+    <Sides key="count">
       <div>
         {percentage && <Percentage value={electorate.response_yes_percentage} yes large={large} />}
         {integer && <Integer value={electorate.response_yes_count} units={units} yes large={large} />}
