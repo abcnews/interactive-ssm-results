@@ -12,10 +12,6 @@ const Text = require('../Text');
 const WaffleGrid = require('../WaffleGrid');
 const styles = require('./styles.scss');
 
-const TEMP_YES = 6792673;
-const TEMP_TURNOUT = 12350315;
-const TEMP_ELIGIBLE = 16039370;
-
 const ENDS_IN_IA = /ia$/;
 
 class App extends React.Component {
@@ -50,15 +46,15 @@ class App extends React.Component {
   renderVotes(electorate, { bar = true, percentage = true, integer = true, large = false }) {
     return (
       <div>
-        {bar && <Bar value={TEMP_YES / TEMP_TURNOUT} large={large} />}
+        {bar && <Bar value={electorate.response_yes_percentage} large={large} />}
         <Sides>
           <div>
-            {percentage && <Percentage value={TEMP_YES / TEMP_TURNOUT} yes large={large} />}
-            {integer && <Integer value={TEMP_YES} units="votes" yes large={large} />}
+            {percentage && <Percentage value={electorate.response_yes_percentage} yes large={large} />}
+            {integer && <Integer value={electorate.response_yes_count} units="votes" yes large={large} />}
           </div>
           <div>
-            {percentage && <Percentage value={(TEMP_TURNOUT - TEMP_YES) / TEMP_TURNOUT} no large={large} />}
-            {integer && <Integer value={TEMP_TURNOUT - TEMP_YES} units="votes" no large={large} />}
+            {percentage && <Percentage value={electorate.response_no_percentage} no large={large} />}
+            {integer && <Integer value={electorate.response_no_count} units="votes" no large={large} />}
           </div>
         </Sides>
       </div>
@@ -73,7 +69,7 @@ class App extends React.Component {
         </Text>
         <WaffleGrid
           waffles={[
-            { label: 'Total', value: TEMP_TURNOUT, total: TEMP_ELIGIBLE },
+            { label: 'Total', value: electorate.turnout_total_count, total: electorate.turnout_total_eligible },
             {
               label: 'Male',
               value: electorate.turnout_male_count,
