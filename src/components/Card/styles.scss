@@ -35,14 +35,6 @@
   padding: 0.75rem 0.75rem 0.375rem;
   box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.15);
   background-color: #fff;
-
-  > * > :first-child {
-    margin-top: 0;
-  }
-
-  > * > :last-child {
-    margin-bottom: 0;
-  }
 }
 
 .open {
@@ -85,6 +77,7 @@
     transform-origin: top right;
   }
 }
+
 .bottomless.open + .topless {
   display: block;
 }
@@ -108,10 +101,6 @@
 
 .bottom {
   animation: nudgeIn 0.5s backwards;
-}
-
-.top + .bottom {
-  margin-top: 1rem;
 }
 
 .topless > .bottom {
