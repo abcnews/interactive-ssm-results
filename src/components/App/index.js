@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const xhr = require('xhr');
+const Abbreviation = require('../Abbreviation');
 const Bar = require('../Bar');
 const Card = require('../Card');
 const CardGrid = require('../CardGrid');
@@ -149,7 +150,7 @@ class App extends React.Component {
             top: (
               <div>
                 <Text heading={4} nomargin>
-                  {electorate.electorate_name}
+                  <Abbreviation title={electorate.electorate_name}>{electorate.electorate_name_short}</Abbreviation>
                 </Text>
                 {this.renderVotes(electorate, { integer: false })}
               </div>
@@ -181,6 +182,7 @@ class App extends React.Component {
               <div>
                 <Text heading={4} nomargin>
                   {electorate.electorate_name}
+                  <small>{electorate.state_name}</small>
                 </Text>
                 {this.renderVotes(electorate, { integer: false })}
               </div>

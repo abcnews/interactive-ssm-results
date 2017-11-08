@@ -1,0 +1,16 @@
+@import '../../constants.scss';
+
+.root {
+  color: inherit;
+  text-decoration: none;
+
+  @media #{$mq-not-sm} {
+    &::before {
+      content: attr(aria-label);
+    }
+
+    span {
+      display: none;
+    }
+  }
+}
