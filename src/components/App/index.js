@@ -43,10 +43,15 @@ class App extends React.Component {
     return this.state.electorates.filter(electorate => electorate.electorate_level === level);
   }
 
-  renderVotes(
-    electorate,
-    { bar = true, prediction = false, percentage = true, integer = true, large = false, units = 'votes' }
-  ) {
+  renderResult({
+    electorate = {},
+    bar = true,
+    prediction = false,
+    percentage = true,
+    integer = true,
+    large = false,
+    units = 'votes'
+  }) {
     return (
       <div>
         {bar && <Bar value={electorate.response_yes_percentage} large={large} prediction={prediction} />}
@@ -133,7 +138,7 @@ class App extends React.Component {
                 <Text heading={4} headingStyle={3} nomargin>
                   {electorate.electorate_name}
                 </Text>
-                {this.renderVotes(electorate, { large: true })}
+                {this.renderResult({ electorate, large: true })}
                 <Share target={electorate.electorate_id} />
               </div>
             }
@@ -150,12 +155,12 @@ class App extends React.Component {
                 <Text heading={5} headingStyle={4} nomargin>
                   {this.state.houses[0].house_name}
                 </Text>
-                {this.renderVotes(this.state.houses[0], { prediction: true, units: 'members' })}
+                {this.renderResult({ electorate: this.state.houses[0], prediction: true, units: 'members' })}
                 <br />
                 <Text heading={5} headingStyle={4} nomargin>
                   {this.state.houses[1].house_name}
                 </Text>
-                {this.renderVotes(this.state.houses[1], { prediction: true, units: 'members' })}
+                {this.renderResult({ electorate: this.state.houses[1], prediction: true, units: 'members' })}
                 <Text todo>
                   More stuff about what we think will happen in parliament. There is such a lot of talk going around
                   about branding, but how do you use it to help you reach more people and market your products or
@@ -173,10 +178,10 @@ class App extends React.Component {
                 <Text heading={4} nomargin>
                   <Abbreviation title={electorate.electorate_name}>{electorate.electorate_name_short}</Abbreviation>
                 </Text>
-                {this.renderVotes(electorate, { integer: false })}
+                {this.renderResult({ electorate, integer: false })}
               </div>
             ),
-            middle: this.renderVotes(electorate, { bar: false, percentage: false }),
+            middle: this.renderResult({ electorate, bar: false, percentage: false }),
             bottom: (
               <div>
                 <Share target={electorate.electorate_id} />
@@ -198,12 +203,12 @@ class App extends React.Component {
                   {electorate.electorate_name}
                   <small>{electorate.state_name}</small>
                 </Text>
-                {this.renderVotes(electorate, { integer: false })}
+                {this.renderResult({ electorate, integer: false })}
               </div>
             }
             bottom={
               <div>
-                {this.renderVotes(electorate, { bar: false, percentage: false })}
+                {this.renderResult({ electorate, bar: false, percentage: false })}
                 <Share target={electorate.electorate_id} />
                 {this.renderTurnout(electorate)}
               </div>
