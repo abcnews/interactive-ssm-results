@@ -5,6 +5,7 @@ const { adjective } = require('../../util');
 const Abbreviation = require('../Abbreviation');
 const Card = require('../Card');
 const CardGrid = require('../CardGrid');
+const National = require('../National');
 const Result = require('../Result');
 const Share = require('../Share');
 const Text = require('../Text');
@@ -43,58 +44,11 @@ class App extends React.Component {
   render() {
     return (
       <div className={styles.root}>
-        {this.getElectoratesForLevel('national').map(electorate => (
-          <Card
-            key={electorate.electorate_id}
-            id={electorate.electorate_id}
-            top={[
-              <Text key="heading" heading={4} headingStyle={3} nomargin>
-                {electorate.electorate_name}
-              </Text>,
-              <Result key="result" electorate={electorate} bar integer large percentage />,
-              <Share key="share" target={electorate.electorate_id} />
-            ]}
-            bottom={[
-              <Turnout key="turnout" electorate={electorate} />,
-              <Text key="heading-next" heading={4} align="center">
-                So what happens next?
-              </Text>,
-              <Text key="text-next-a" todo>
-                Stuff about what we think will happen in parliament. There is such a lot of talk going around about
-                branding, but how do you use it to help you reach more people and market your products or services?
-              </Text>,
-              <Text key="heading-reps" heading={5} headingStyle={4} nomargin>
-                {this.state.houses[0].house_name}
-              </Text>,
-              <Result
-                key="result-reps"
-                electorate={this.state.houses[0]}
-                bar
-                integer
-                percentage
-                prediction
-                units={'members'}
-              />,
-              <br key="break" />,
-              <Text key="heading-senate" heading={5} headingStyle={4} nomargin>
-                {this.state.houses[1].house_name}
-              </Text>,
-              <Result
-                key="result-senate"
-                electorate={this.state.houses[1]}
-                bar
-                integer
-                percentage
-                prediction
-                units={'members'}
-              />,
-              <Text key="text-next-b" todo>
-                More stuff about what we think will happen in parliament. There is such a lot of talk going around about
-                branding, but how do you use it to help you reach more people and market your products or services?
-              </Text>
-            ]}
-          />
-        ))}
+        <National
+          electorate={this.getElectoratesForLevel('national')[0]}
+          reps={this.state.houses[0]}
+          senate={this.state.houses[1]}
+        />
         <CardGrid
           cards={this.getElectoratesForLevel('state').map(electorate => ({
             id: electorate.electorate_id,
