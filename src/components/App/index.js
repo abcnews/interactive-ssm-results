@@ -75,6 +75,16 @@ class App extends React.Component {
           waffles={[
             { label: 'Total', value: TEMP_TURNOUT, total: TEMP_ELIGIBLE },
             {
+              label: 'Male',
+              value: electorate.turnout_male_count,
+              total: electorate.turnout_male_eligible
+            },
+            {
+              label: 'Female',
+              value: electorate.turnout_female_count,
+              total: electorate.turnout_female_eligible
+            },
+            {
               label: '18 - 24 yrs',
               value: electorate.turnout_18to24_count,
               total: electorate.turnout_18to24_eligible
