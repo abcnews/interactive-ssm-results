@@ -1,0 +1,26 @@
+.has-sticky {
+  // Odyssey Nav-bar should behave as if it's hiding
+  :global .Nav.is-above > .Nav-bar {
+    transform: translateY(-102%);
+  }
+}
+
+.root {
+}
+
+.controls {
+  z-index: 1;
+}
+
+.inner {
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding: 1rem 0.75rem 0.75rem;
+  // Should use Odyssey document background-colour
+  background-color: #f9f9f9;
+  background-color: var(--bg, #f9f9f9);
+
+  .sticky > & {
+    border-bottom: 0.0625rem solid #d9d9d9;
+  }
+}
