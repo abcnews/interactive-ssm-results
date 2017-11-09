@@ -6,7 +6,7 @@ const Share = require('../Share');
 const Text = require('../Text');
 const Turnout = require('../Turnout');
 
-const National = ({ electorate, reps, senate }) => (
+const National = ({ electorate, house, senate }) => (
   <Card
     key={electorate.electorate_id}
     id={electorate.electorate_id}
@@ -26,10 +26,10 @@ const National = ({ electorate, reps, senate }) => (
         Stuff about what we think will happen in parliament. There is such a lot of talk going around about branding,
         but how do you use it to help you reach more people and market your products or services?
       </Text>,
-      <Text key="heading-reps" heading={5} headingStyle={4} nomargin>
-        {reps.house_name}
+      <Text key="heading-house" heading={5} headingStyle={4} nomargin>
+        {house.house_name}
       </Text>,
-      <Result key="result-reps" electorate={reps} bar integer percentage prediction units={'members'} />,
+      <Result key="result-house" electorate={house} bar integer percentage prediction units={'members'} />,
       <br key="break" />,
       <Text key="heading-senate" heading={5} headingStyle={4} nomargin>
         {senate.house_name}
@@ -45,13 +45,13 @@ const National = ({ electorate, reps, senate }) => (
 
 National.propTypes = {
   electorate: PropTypes.object.isRequired,
-  reps: PropTypes.object.isRequired,
+  house: PropTypes.object.isRequired,
   senate: PropTypes.object.isRequired
 };
 
 National.defaultProps = {
   electorate: {},
-  reps: {},
+  house: {},
   senate: {}
 };
 

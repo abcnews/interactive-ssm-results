@@ -11,8 +11,11 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      electorates: [],
-      houses: [],
+      national: {},
+      states: [],
+      divisions: [],
+      house: {},
+      senate: {},
       politicians: []
     };
 
@@ -23,28 +26,23 @@ class App extends React.Component {
     xhr({ json: true, url: this.props.dataURL }, (err, response, body) => {
       if (!err) {
         this.setState({
-          electorates: body[0],
-          houses: body[1],
+          national: body[0].filter(x => x.electorate_level === 'national')[0],
+          states: body[0].filter(x => x.electorate_level === 'state'),
+          divisions: body[0].filter(x => x.electorate_level === 'division'),
+          house: body[1][0],
+          senate: body[1][1],
           politicians: body[2]
         });
       }
     });
   }
 
-  getElectoratesForLevel(level) {
-    return this.state.electorates.filter(electorate => electorate.electorate_level === level);
-  }
-
   render() {
     return (
       <div className={styles.root}>
-        <National
-          electorate={this.getElectoratesForLevel('national')[0]}
-          reps={this.state.houses[0]}
-          senate={this.state.houses[1]}
-        />
-        <States electorates={this.getElectoratesForLevel('state')} />
-        <Divisions electorates={this.getElectoratesForLevel('division')} />
+        <National electorate={this.state.national} house={this.state.house} senate={this.state.senate} />
+        <States electorates={this.state.states} />
+        <Divisions electorates={this.state.divisions} />
       </div>
     );
   }
