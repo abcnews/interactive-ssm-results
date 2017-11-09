@@ -5,10 +5,10 @@ const Integer = require('../Integer');
 const Percentage = require('../Percentage');
 const Sides = require('../Sides');
 
-const Result = ({ electorate, bar, prediction, percentage, integer, large, units }) => [
+const Count = ({ electorate, bar, prediction, percentage, integer, large, units }) => [
   bar && <Bar key="bar" value={electorate.response_yes_percentage} large={large} prediction={prediction} />,
   (percentage || integer) && (
-    <Sides key="count">
+    <Sides key="sides">
       <div>
         {percentage && <Percentage value={electorate.response_yes_percentage} yes large={large} />}
         {integer && <Integer value={electorate.response_yes_count} units={units} yes large={large} />}
@@ -21,7 +21,7 @@ const Result = ({ electorate, bar, prediction, percentage, integer, large, units
   )
 ];
 
-Result.propTypes = {
+Count.propTypes = {
   electorate: PropTypes.object.isRequired,
   large: PropTypes.bool,
   bar: PropTypes.bool,
@@ -31,7 +31,7 @@ Result.propTypes = {
   units: PropTypes.string
 };
 
-Result.defaultProps = {
+Count.defaultProps = {
   electorate: {},
   large: false,
   bar: false,
@@ -41,4 +41,4 @@ Result.defaultProps = {
   units: 'votes'
 };
 
-module.exports = Result;
+module.exports = Count;

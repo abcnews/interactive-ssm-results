@@ -1,7 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const Card = require('../Card');
-const Result = require('../Result');
+const Count = require('../Count');
 const Share = require('../Share');
 const Text = require('../Text');
 const Turnout = require('../Turnout');
@@ -16,10 +16,10 @@ const Divisions = ({ electorates }) =>
           {electorate.electorate_name}
           <small>{electorate.state_name}</small>
         </Text>,
-        <Result key="result" electorate={electorate} bar percentage />
+        <Count key="count" electorate={electorate} bar percentage />
       ]}
       bottom={[
-        <Result key="result" electorate={electorate} integer />,
+        <Count key="count" electorate={electorate} integer />,
         <Share key="share" target={electorate.electorate_id} />,
         <Turnout key="turnout" electorate={electorate} />
       ]}

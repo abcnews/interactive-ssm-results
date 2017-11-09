@@ -3,7 +3,7 @@ const React = require('react');
 const { adjective } = require('../../util');
 const Abbreviation = require('../Abbreviation');
 const CardGrid = require('../CardGrid');
-const Result = require('../Result');
+const Count = require('../Count');
 const Share = require('../Share');
 const Text = require('../Text');
 const Turnout = require('../Turnout');
@@ -16,9 +16,9 @@ const States = ({ electorates }) => (
         <Text key="heading" heading={4} nomargin>
           <Abbreviation title={electorate.electorate_name}>{electorate.electorate_name_short}</Abbreviation>
         </Text>,
-        <Result key="result" electorate={electorate} bar percentage />
+        <Count key="count" electorate={electorate} bar percentage />
       ],
-      middle: <Result electorate={electorate} integer />,
+      middle: <Count electorate={electorate} integer />,
       bottom: [
         <Share key="share" target={electorate.electorate_id} />,
         <Turnout key="turnout" electorate={electorate} />,
