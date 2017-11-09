@@ -6,7 +6,7 @@ const styles = require('./styles.scss');
 const cx = classNames.bind(styles);
 
 const Bar = ({ value, max, large, prediction }) => (
-  <div className={cx('root', { large, prediction })} role="presesntation">
+  <div className={cx('root', { large, prediction })} role="presentation">
     <progress value={value} max={max} />
     <span className={styles.midpoint} />
   </div>
