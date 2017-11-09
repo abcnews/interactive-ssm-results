@@ -11,11 +11,11 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      national: {},
+      national: null,
       states: [],
       divisions: [],
-      house: {},
-      senate: {},
+      house: null,
+      senate: null,
       politicians: []
     };
 
