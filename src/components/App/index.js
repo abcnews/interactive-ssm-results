@@ -11,6 +11,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      result: null,
       national: null,
       states: [],
       divisions: [],
@@ -25,8 +26,11 @@ class App extends React.Component {
   fetchData() {
     xhr({ json: true, url: this.props.dataURL }, (err, response, body) => {
       if (!err) {
+        const national = body[0].filter(x => x.electorate_level === 'national')[0];
+
         this.setState({
-          national: body[0].filter(x => x.electorate_level === 'national')[0],
+          result: national.result,
+          national,
           states: body[0].filter(x => x.electorate_level === 'state'),
           divisions: body[0].filter(x => x.electorate_level === 'division'),
           house: body[1][0],
@@ -40,9 +44,14 @@ class App extends React.Component {
   render() {
     return (
       <div className={styles.root}>
-        <National electorate={this.state.national} house={this.state.house} senate={this.state.senate} />
-        <States electorates={this.state.states} />
-        <Divisions electorates={this.state.divisions} />
+        <National
+          result={this.state.result}
+          electorate={this.state.national}
+          house={this.state.house}
+          senate={this.state.senate}
+        />
+        <States result={this.state.result} electorates={this.state.states} />
+        <Divisions result={this.state.result} electorates={this.state.divisions} />
       </div>
     );
   }

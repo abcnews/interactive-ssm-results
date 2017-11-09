@@ -8,7 +8,7 @@ const Share = require('../Share');
 const Text = require('../Text');
 const Turnout = require('../Turnout');
 
-const States = ({ electorates }) => (
+const States = ({ result, electorates }) => (
   <CardGrid
     cards={electorates.map(electorate => ({
       id: electorate.electorate_id,
@@ -21,20 +21,27 @@ const States = ({ electorates }) => (
       middle: <Count electorate={electorate} integer />,
       bottom: [
         <Share key="share" target={electorate.electorate_id} />,
-        <Turnout key="turnout" electorate={electorate} />,
-        <Text key="heading" heading={4} align="center">
-          {`Which ${adjective(electorate.electorate_name)} senators are likely to support same-sex marriage?`}
-        </Text>
-      ]
+        <Turnout key="turnout" electorate={electorate} />
+      ].concat(
+        result === 'y'
+          ? [
+              <Text key="heading" heading={4} align="center">
+                {`Which ${adjective(electorate.electorate_name)} senators are likely to support same-sex marriage?`}
+              </Text>
+            ]
+          : []
+      )
     }))}
   />
 );
 
 States.propTypes = {
+  result: PropTypes.string,
   electorates: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 States.defaultProps = {
+  result: '',
   electorate: [{}]
 };
 

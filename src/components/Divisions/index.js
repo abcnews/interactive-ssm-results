@@ -6,7 +6,7 @@ const Share = require('../Share');
 const Text = require('../Text');
 const Turnout = require('../Turnout');
 
-const Divisions = ({ electorates }) =>
+const Divisions = ({ result, electorates }) =>
   electorates.map(electorate => (
     <Card
       key={electorate.electorate_id}
@@ -18,19 +18,19 @@ const Divisions = ({ electorates }) =>
         </Text>,
         <Count key="count" electorate={electorate} bar percentage />
       ]}
-      bottom={[
-        <Count key="count" electorate={electorate} integer />,
-        <Share key="share" target={electorate.electorate_id} />,
-        <Turnout key="turnout" electorate={electorate} />
-      ]}
+      bottom={[<Count key="count" electorate={electorate} integer />]
+        .concat(result === 'y' ? [<Share key="share" target={electorate.electorate_id} />] : [])
+        .concat([<Turnout key="turnout" electorate={electorate} />])}
     />
   ));
 
 Divisions.propTypes = {
+  result: PropTypes.string,
   electorates: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 Divisions.defaultProps = {
+  result: '',
   electorate: [{}]
 };
 
