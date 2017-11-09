@@ -6,7 +6,12 @@ const styles = require('./styles.scss');
 const cx = classNames.bind(styles);
 
 const Percentage = ({ value, digits, yes, no, large }) => {
-  const pct = (value * 100).toFixed(digits);
+  let pct = (value * 100).toFixed(digits);
+
+  if (pct == 50) {
+    pct = (value * 100).toFixed(1);
+  }
+
   const prefix = yes ? 'Yes' : no ? 'No' : '';
   const label = `${prefix ? `${prefix}: ` : ''}${pct} per cent`;
 
