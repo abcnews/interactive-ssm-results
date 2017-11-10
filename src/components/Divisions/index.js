@@ -5,6 +5,7 @@ const { StickyContainer, Sticky } = require('react-sticky');
 const { scrollToId, shareText } = require('../../util');
 const Card = require('../Card');
 const Count = require('../Count');
+const ElectorateFinder = require('../ElectorateFinder');
 const Select = require('../Select');
 const Share = require('../Share');
 const Sides = require('../Sides');
@@ -33,10 +34,22 @@ class Divisions extends React.Component {
 
     this.reorder = this.reorder.bind(this);
     this.scrollToTop = this.scrollToTop.bind(this);
+    this.handleElectorateChoice = this.handleElectorateChoice.bind(this);
   }
 
   reorder(event) {
     this.setState({ order: event.target.value });
+  }
+
+  handleElectorateChoice(id) {
+    // TODO: Make this less awful
+    if (scrollToId(id) !== false) {
+      const cardMoreLessEl = window[id].previousElementSibling;
+
+      if (cardMoreLessEl.textContent.indexOf('more') > -1) {
+        cardMoreLessEl.click();
+      }
+    }
   }
 
   scrollToTop() {
@@ -69,6 +82,11 @@ class Divisions extends React.Component {
                     <Text heading={3} nomargin>
                       Electorates
                     </Text>
+                    <ElectorateFinder
+                      electorates={this.props.electorates}
+                      mps={this.props.mps}
+                      onElectorateChosen={this.handleElectorateChoice}
+                    />
                     <div className={styles.controls}>
                       <Sides>
                         <Select value={this.state.order} options={Object.keys(ORDERINGS)} onChange={this.reorder} />
@@ -108,7 +126,7 @@ class Divisions extends React.Component {
                       )}
                     />
                   ]
-                    .concat(this.props.result === 'y' ? [<Text>[TODO: Representative]</Text>] : [])
+                    .concat(this.props.result === 'y' ? [<Text key="mp">[TODO: MP]</Text>] : [])
                     .concat([<Turnout key="turnout" electorate={electorate} />])}
                 />
               ))}
@@ -121,12 +139,14 @@ class Divisions extends React.Component {
 
 Divisions.propTypes = {
   result: PropTypes.string,
-  electorates: PropTypes.arrayOf(PropTypes.object)
+  electorates: PropTypes.arrayOf(PropTypes.object),
+  mps: PropTypes.arrayOf(PropTypes.object)
 };
 
 Divisions.defaultProps = {
   result: '',
-  electorates: []
+  electorates: [],
+  mps: []
 };
 
 module.exports = Divisions;

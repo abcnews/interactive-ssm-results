@@ -9,7 +9,7 @@ module.exports.adjective = text => text.replace(ENDS_IN_IA, IAN);
 module.exports.nowrap = text => text.replace(WHITESPACE, NBSP);
 
 module.exports.scrollToId = id =>
-  window[id] && window[id].tagName && window[id].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  id && window[id] && window[id].tagName && window[id].scrollIntoView({ behavior: 'smooth', block: 'start' });
 
 module.exports.shareText = (place, pctYes) =>
   `${place} has ${(pctYes * 100).toFixed(1)}% support for legalising same-sex marriage`;

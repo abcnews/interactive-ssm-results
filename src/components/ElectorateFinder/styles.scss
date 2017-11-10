@@ -1,0 +1,26 @@
+.root {
+  position: relative;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.map {
+  display: none;
+}
+
+.input {
+  padding: 0.25rem;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.results {
+}
+
+.result {
+  margin-right: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border: none;
+  border-radius: 0.125rem;
+  background: lightgrey;
+}

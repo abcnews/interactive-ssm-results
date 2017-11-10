@@ -35,7 +35,8 @@ class App extends React.Component {
           divisions: body[0].filter(x => x.electorate_level === 'division'),
           house: body[1][0],
           senate: body[1][1],
-          politicians: body[2]
+          mps: body[2].filter(x => x.house_id === 'r'),
+          senators: body[2].filter(x => x.house_id === 's')
         });
       }
     });
@@ -51,7 +52,7 @@ class App extends React.Component {
           senate={this.state.senate}
         />
         <States result={this.state.result} electorates={this.state.states} />
-        <Divisions result={this.state.result} electorates={this.state.divisions} />
+        <Divisions result={this.state.result} electorates={this.state.divisions} mps={this.state.mps} />
       </div>
     );
   }
