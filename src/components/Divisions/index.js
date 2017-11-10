@@ -2,7 +2,7 @@ const classNames = require('classnames/bind');
 const PropTypes = require('prop-types');
 const React = require('react');
 const { StickyContainer, Sticky } = require('react-sticky');
-const { scrollToId } = require('../../util');
+const { scrollToId, shareText } = require('../../util');
 const Card = require('../Card');
 const Count = require('../Count');
 const Select = require('../Select');
@@ -99,7 +99,14 @@ class Divisions extends React.Component {
                   ]}
                   bottom={[
                     <Count key="count" electorate={electorate} integer units={'votes'} />,
-                    <Share key="share" target={electorate.electorate_id} />
+                    <Share
+                      key="share"
+                      target={electorate.electorate_id}
+                      text={shareText(
+                        `The electorate of ${electorate.electorate_name}`,
+                        electorate.response_yes_percentage
+                      )}
+                    />
                   ]
                     .concat(this.props.result === 'y' ? [<Text>[TODO: Representative]</Text>] : [])
                     .concat([<Turnout key="turnout" electorate={electorate} />])}

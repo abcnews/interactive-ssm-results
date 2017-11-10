@@ -10,3 +10,6 @@ module.exports.nowrap = text => text.replace(WHITESPACE, NBSP);
 
 module.exports.scrollToId = id =>
   window[id] && window[id].tagName && window[id].scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+module.exports.shareText = (place, pctYes) =>
+  `${place} has ${(pctYes * 100).toFixed(1)}% support for legalising same-sex marriage`;

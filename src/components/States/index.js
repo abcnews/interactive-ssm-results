@@ -1,12 +1,14 @@
 const PropTypes = require('prop-types');
 const React = require('react');
-const { adjective } = require('../../util');
+const { adjective, shareText } = require('../../util');
 const Abbreviation = require('../Abbreviation');
 const CardGrid = require('../CardGrid');
 const Count = require('../Count');
 const Share = require('../Share');
 const Text = require('../Text');
 const Turnout = require('../Turnout');
+
+const colloquial = name => (name.indexOf('Territory') > -1 ? `The ${name}` : name);
 
 const States = ({ result, electorates }) => (
   <CardGrid
@@ -20,7 +22,11 @@ const States = ({ result, electorates }) => (
       ],
       middle: <Count electorate={electorate} integer />,
       bottom: [
-        <Share key="share" target={electorate.electorate_id} />,
+        <Share
+          key="share"
+          target={electorate.electorate_id}
+          text={shareText(colloquial(electorate.electorate_name), electorate.response_yes_percentage)}
+        />,
         <Turnout key="turnout" electorate={electorate} />
       ].concat(
         result === 'y'

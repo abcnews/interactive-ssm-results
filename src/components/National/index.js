@@ -1,5 +1,6 @@
 const PropTypes = require('prop-types');
 const React = require('react');
+const { shareText } = require('../../util');
 const Card = require('../Card');
 const Count = require('../Count');
 const Share = require('../Share');
@@ -16,7 +17,11 @@ const National = ({ result, electorate, house, senate }) =>
           {electorate.electorate_name}
         </Text>,
         <Count key="count" electorate={electorate} bar integer large percentage units={'votes'} />,
-        <Share key="share" target={electorate.electorate_id} />
+        <Share
+          key="share"
+          target={electorate.electorate_id}
+          text={shareText('Australia', electorate.response_yes_percentage)}
+        />
       ]}
       bottom={[
         <Turnout key="turnout" electorate={electorate} />,
