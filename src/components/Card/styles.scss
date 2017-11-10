@@ -118,9 +118,11 @@
 
   &:first-child {
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 0;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 0.75rem 3.25rem;
+    cursor: pointer;
   }
 
   &:focus,
