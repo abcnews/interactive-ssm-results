@@ -38,7 +38,7 @@ Count.defaultProps = {
   prediction: false,
   percentage: false,
   integer: false,
-  units: 'votes'
+  units: ''
 };
 
 module.exports = Count;
