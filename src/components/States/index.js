@@ -27,7 +27,8 @@ const States = ({ result, electorates }) => (
           ? [
               <Text key="heading" heading={4} align="center">
                 {`Which ${adjective(electorate.electorate_name)} senators are likely to support same-sex marriage?`}
-              </Text>
+              </Text>,
+              <Text>[TODO: Senators]</Text>
             ]
           : []
       )

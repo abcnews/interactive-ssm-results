@@ -101,8 +101,11 @@ class Divisions extends React.Component {
                     </Text>,
                     <Count key="count" electorate={electorate} bar percentage />
                   ]}
-                  bottom={[<Count key="count" electorate={electorate} integer />]
-                    .concat(this.props.result === 'y' ? [<Share key="share" target={electorate.electorate_id} />] : [])
+                  bottom={[
+                    <Count key="count" electorate={electorate} integer />,
+                    <Share key="share" target={electorate.electorate_id} />
+                  ]
+                    .concat(this.props.result === 'y' ? [<Text>[TODO: Representative]</Text>] : [])
                     .concat([<Turnout key="turnout" electorate={electorate} />])}
                 />
               ))}

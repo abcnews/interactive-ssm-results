@@ -27,9 +27,7 @@ const National = ({ result, electorate, house, senate }) =>
         result === 'y'
           ? [
               <Text key="text-result-yes-pre" todo>
-                Stuff about what we think will happen in parliament due to Yes result. There is such a lot of talk going
-                around about branding, but how do you use it to help you reach more people and market your products or
-                services?
+                [TODO: Stuff about what we think will happen in parliament due to Yes result.]
               </Text>,
               <Text key="heading-house" heading={5} headingStyle={4} nomargin>
                 {house.house_name}
@@ -40,10 +38,8 @@ const National = ({ result, electorate, house, senate }) =>
                 {senate.house_name}
               </Text>,
               <Count key="count-senate" electorate={senate} bar integer percentage prediction units={'members'} />,
-              <Text key="text-result-yes-post" todo>
-                More stuff about what we think will happen in parliament due to Yes result. There is such a lot of talk
-                going around about branding, but how do you use it to help you reach more people and market your
-                products or services?
+              <Text key="text-result-yes-post">
+                [TODO: More stuff about what we think will happen in parliament due to Yes result.]
               </Text>
             ]
           : [
