@@ -2,6 +2,7 @@ const classNames = require('classnames/bind');
 const PropTypes = require('prop-types');
 const React = require('react');
 const { StickyContainer, Sticky } = require('react-sticky');
+const { scrollToId } = require('../../util');
 const Card = require('../Card');
 const Count = require('../Count');
 const Select = require('../Select');
@@ -30,13 +31,8 @@ class Divisions extends React.Component {
       order: null
     };
 
-    this.getRootRef = this.getRootRef.bind(this);
     this.reorder = this.reorder.bind(this);
     this.scrollToTop = this.scrollToTop.bind(this);
-  }
-
-  getRootRef(root) {
-    this.root = root;
   }
 
   reorder(event) {
@@ -44,7 +40,7 @@ class Divisions extends React.Component {
   }
 
   scrollToTop() {
-    this.root.node.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollToId('divisions');
   }
 
   componentWillReceiveProps(props) {
@@ -57,7 +53,7 @@ class Divisions extends React.Component {
     return (
       this.props.electorates &&
       this.props.electorates.length > 0 && (
-        <StickyContainer ref={this.getRootRef} className={cx('root')}>
+        <StickyContainer id={'divisions'} className={cx('root')}>
           <Sticky>
             {({ isSticky, wasSticky, calculatedHeight, style }) => {
               // Interaction with Odyssey Nav-bar

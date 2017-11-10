@@ -1,6 +1,7 @@
 const classNames = require('classnames/bind');
 const PropTypes = require('prop-types');
 const React = require('react');
+const { scrollToId } = require('../../util');
 const styles = require('./styles.scss');
 
 const cx = classNames.bind(styles);
@@ -14,7 +15,7 @@ class Card extends React.Component {
     this.state = this.props.onToggle
       ? {}
       : {
-          open: window.location.hash.split('#') === this.props.id
+          open: false
         };
   }
 
@@ -24,12 +25,19 @@ class Card extends React.Component {
     });
   }
 
+  componentDidMount() {
+    if (this.props.id && this.props.id === window.location.hash.slice(1)) {
+      history.replaceState({}, '', window.location.pathname);
+      this.toggle();
+      setTimeout(scrollToId, 300, this.props.id);
+    }
+  }
+
   render() {
     const open = this.props.onToggle ? this.props.open : this.state.open;
 
     return (
       <div
-        id={this.props.id}
         className={cx(
           'root',
           {
@@ -48,6 +56,7 @@ class Card extends React.Component {
                 {open ? 'less' : 'more'}
               </button>
             )}
+            {this.props.id && <div id={this.props.id} className={styles.deepLink} />}
             {this.props.top}
           </div>
         )}
