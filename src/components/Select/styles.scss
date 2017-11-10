@@ -1,0 +1,49 @@
+@import '../../constants.scss';
+
+.root {
+  position: relative;
+
+  > select {
+    margin: 0;
+    border: 0;
+    padding: 0.25rem 0.5rem;
+    width: 100%;
+    background-color: transparent;
+    color: $color-text;
+    font-family: inherit;
+    font-size: 1em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-appearance: none;
+    -moz-appearance: menulist-text;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    -webkit-padding-end: 1.375rem;
+    -moz-padding-end: 1.375rem;
+    -webkit-padding-start: 0.5rem;
+    -moz-padding-start: 0.5rem;
+
+    &::-ms-value {
+      color: $color-text;
+    }
+
+    &::-ms-expand {
+      display: none;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    width: 0.875rem;
+    height: 0.875rem;
+    background-image: url(./arrow.svg);
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    pointer-events: none;
+  }
+}

@@ -4,7 +4,9 @@ const React = require('react');
 const { StickyContainer, Sticky } = require('react-sticky');
 const Card = require('../Card');
 const Count = require('../Count');
+const Select = require('../Select');
 const Share = require('../Share');
+const Sides = require('../Sides');
 const Text = require('../Text');
 const Turnout = require('../Turnout');
 const styles = require('./styles.scss');
@@ -12,8 +14,8 @@ const styles = require('./styles.scss');
 const cx = classNames.bind(styles);
 
 const ATOZ = 'Alphabetically';
-const YES = 'Highest to lowest yes response';
-const NO = 'Highest to lowest no response';
+const YES = 'Highest to lowest yes vote';
+const NO = 'Highest to lowest no vote';
 const ORDERINGS = {
   [ATOZ]: (a, b) => (a.electorate_id < b.electorate_id ? -1 : a.electorate_id > b.electorate_id ? 1 : 0),
   [YES]: (a, b) => b.response_yes_percentage - a.response_yes_percentage,
@@ -28,11 +30,21 @@ class Divisions extends React.Component {
       order: null
     };
 
+    this.getRootRef = this.getRootRef.bind(this);
     this.reorder = this.reorder.bind(this);
+    this.scrollToTop = this.scrollToTop.bind(this);
+  }
+
+  getRootRef(root) {
+    this.root = root;
   }
 
   reorder(event) {
     this.setState({ order: event.target.value });
+  }
+
+  scrollToTop() {
+    this.root.node.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   componentWillReceiveProps(props) {
@@ -45,13 +57,15 @@ class Divisions extends React.Component {
     return (
       this.props.electorates &&
       this.props.electorates.length > 0 && (
-        <StickyContainer className={cx('root')}>
+        <StickyContainer ref={this.getRootRef} className={cx('root')}>
           <Sticky>
-            {({ isSticky, wasSticky, style }) => {
+            {({ isSticky, wasSticky, calculatedHeight, style }) => {
               // Interaction with Odyssey Nav-bar
               if (isSticky !== wasSticky) {
                 document.documentElement.classList[isSticky ? 'add' : 'remove'](cx('has-sticky'));
               }
+
+              this.headerHeight = calculatedHeight;
 
               return (
                 <div className={cx('header', { sticky: isSticky })} style={style}>
@@ -59,13 +73,14 @@ class Divisions extends React.Component {
                     <Text heading={3} nomargin>
                       Electorates
                     </Text>
-                    <select value={this.state.order || ATOZ} onChange={this.reorder}>
-                      {Object.keys(ORDERINGS).map(order => (
-                        <option key={order} value={order}>
-                          {order}
-                        </option>
-                      ))}
-                    </select>
+                    <div className={styles.controls}>
+                      <Sides>
+                        <Select value={this.state.order} options={Object.keys(ORDERINGS)} onChange={this.reorder} />
+                        <button className={styles.top} onClick={this.scrollToTop}>
+                          Go to top
+                        </button>
+                      </Sides>
+                    </div>
                   </div>
                 </div>
               );
