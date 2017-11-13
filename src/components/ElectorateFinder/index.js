@@ -35,6 +35,7 @@ class ElectorateFinder extends React.Component {
 
     this.state = { results: [] };
 
+    this.clearAll = this.clearAll.bind(this);
     this.getInputRef = this.getInputRef.bind(this);
     this.getMapRef = this.getMapRef.bind(this);
     this.init = this.init.bind(this);
@@ -43,30 +44,21 @@ class ElectorateFinder extends React.Component {
     this.onInputChange = this.onInputChange.bind(this);
   }
 
+  clearAll(event) {
+    this.clearInput();
+    this.clearResults();
+
+    if (event) {
+      this.inputEl.focus();
+    }
+  }
+
   clearInput() {
     this.inputEl.value = '';
   }
 
   clearResults() {
     this.setState({ results: [] });
-  }
-
-  init() {
-    if (this.hasMap) {
-      return;
-    }
-
-    loadDependencies(() => {
-      this.map = L.map(this.mapEl);
-      this.map.on('load', () => (this.hasMap = true));
-      this.map.setView(L.latLng(LEAFLET_LAT_LNG), LEAFLET_ZOOM);
-      this.underneath = L.underneath(MAPBOX_TILE_URL, this.map, {
-        featureId: LEAFLET_UNDERNEATH_FEATURE_ID,
-        defaultRadius: LEAFLET_UNDERNEATH_DEFAULT_RADIUS,
-        layers: LEAFLET_UNDERNEATH_LAYERS,
-        subdomains: LEAFLET_UNDERNEATH_SUBDOMAINS
-      });
-    });
   }
 
   electorateAtLatLng(latLng, cb) {
@@ -184,6 +176,24 @@ class ElectorateFinder extends React.Component {
     this.mapEl = el;
   }
 
+  init() {
+    if (this.hasMap) {
+      return;
+    }
+
+    loadDependencies(() => {
+      this.map = L.map(this.mapEl);
+      this.map.on('load', () => (this.hasMap = true));
+      this.map.setView(L.latLng(LEAFLET_LAT_LNG), LEAFLET_ZOOM);
+      this.underneath = L.underneath(MAPBOX_TILE_URL, this.map, {
+        featureId: LEAFLET_UNDERNEATH_FEATURE_ID,
+        defaultRadius: LEAFLET_UNDERNEATH_DEFAULT_RADIUS,
+        layers: LEAFLET_UNDERNEATH_LAYERS,
+        subdomains: LEAFLET_UNDERNEATH_SUBDOMAINS
+      });
+    });
+  }
+
   onInputChange(event) {
     event.persist();
 
@@ -193,8 +203,7 @@ class ElectorateFinder extends React.Component {
 
   pick(event) {
     this.props.onElectorateChosen(event.currentTarget.dataset.electorate);
-    this.clearInput();
-    this.clearResults();
+    this.clearAll();
   }
 
   render() {
@@ -202,15 +211,18 @@ class ElectorateFinder extends React.Component {
       <div className={styles.root}>
         <div ref={this.getMapRef} className={styles.map} hidden />
         <div className={cx('inner', { open: this.state.results.length })}>
-          <input
-            ref={this.getInputRef}
-            className={styles.input}
-            type="text"
-            autoComplete="off"
-            placeholder="Enter your address, electorate, or MP"
-            onFocus={this.init}
-            onChange={this.onInputChange}
-          />
+          <div className={styles.search}>
+            <input
+              ref={this.getInputRef}
+              className={styles.input}
+              type="text"
+              autoComplete="off"
+              placeholder="Enter your address, electorate, or MP"
+              onFocus={this.init}
+              onChange={this.onInputChange}
+            />
+            <button className={styles.clear} onClick={this.clearAll} />
+          </div>
           {this.state.results.length ? (
             <div className={styles.results}>
               {this.state.results.map(result => {
