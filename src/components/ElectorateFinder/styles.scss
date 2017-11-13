@@ -49,6 +49,10 @@
   font-size: 0.8125rem;
   line-height: 0.875rem;
   background-color: inherit;
+
+  &::-ms-clear {
+    display: none;
+  }
 }
 
 .clear {
