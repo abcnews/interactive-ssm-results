@@ -1,0 +1,12 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 0 auto;
+  max-width: 30rem;
+
+  & > * {
+    margin: 0 0.5rem 1.5rem;
+    width: 42%;
+  }
+}
