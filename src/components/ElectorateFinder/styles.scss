@@ -76,25 +76,31 @@
 
 .results {
   margin: 0 0.5rem;
+  padding: 0;
+  list-style: none;
 }
 
 .result {
-  border: none;
-  padding: 0.75rem 1.5rem 0.625rem;
-  width: 100%;
-  background: transparent;
-  text-align: left;
-  font-family: ABCSerif, 'Book Antiqua', 'Palatino Linotype', Palatino, serif;
-  font-size: 0.875rem;
-  cursor: pointer;
+  padding: 0.5rem 0;
 
   & + & {
     border-top: 0.0625rem solid #bbb;
   }
 
-  & > small {
-    margin-left: 0.5rem;
-    font-family: ABCSans, Helvetica, Arial, sans-serif;
-    font-size: 0.6875rem;
+  > button {
+    border: none;
+    padding: 0.25rem 1.5rem;
+    width: 100%;
+    background: transparent;
+    text-align: left;
+    font-family: ABCSerif, 'Book Antiqua', 'Palatino Linotype', Palatino, serif;
+    font-size: 0.875rem;
+    cursor: pointer;
+
+    & > small {
+      margin-left: 0.5rem;
+      font-family: ABCSans, Helvetica, Arial, sans-serif;
+      font-size: 0.6875rem;
+    }
   }
 }

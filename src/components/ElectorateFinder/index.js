@@ -13,6 +13,9 @@ const DEBOUNCE_PERIOD = 500;
 const ELECTORATE_PROPERTY = 'Elect_div';
 const JS_LEAFLET = 'https://unpkg.com/leaflet@1.2.0/dist/leaflet.js';
 const JS_LEAFLET_UNDERNEATH = 'https://unpkg.com/leaflet-underneath@3.0.0/dist/leaflet-underneath.js';
+const KEY_ENTER = 13;
+const KEY_UP = 38;
+const KEY_DOWN = 40;
 const LEAFLET_LAT_LNG = { lat: -35.3082, lng: 149.1244 };
 const LEAFLET_ZOOM = 11;
 const LEAFLET_UNDERNEATH_DEFAULT_RADIUS = 1;
@@ -33,15 +36,17 @@ class ElectorateFinder extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { results: [] };
+    this.state = { focusedIndex: null, results: [] };
 
     this.clearAll = this.clearAll.bind(this);
+    this.getResultRef = this.getResultRef.bind(this);
     this.getInputRef = this.getInputRef.bind(this);
     this.getMapRef = this.getMapRef.bind(this);
     this.init = this.init.bind(this);
     this.find = debounce(this.find.bind(this), DEBOUNCE_PERIOD);
     this.pick = this.pick.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
   }
 
   clearAll(event) {
@@ -58,7 +63,8 @@ class ElectorateFinder extends React.Component {
   }
 
   clearResults() {
-    this.setState({ results: [] });
+    this.resultEls = null;
+    this.setState({ focusedIndex: null, results: [] });
   }
 
   electorateAtLatLng(latLng, cb) {
@@ -86,18 +92,18 @@ class ElectorateFinder extends React.Component {
     let results;
 
     if ((results = this.findByName(query)).length) {
-      return this.setState({ results });
+      return this.setState({ focusedIndex: null, results });
     }
 
     if ((results = this.findByMP(query)).length) {
-      return this.setState({ results });
+      return this.setState({ focusedIndex: null, results });
     }
 
     if (query == +query) {
-      return this.findByPostcode(query, results => this.setState({ results }));
+      return this.findByPostcode(query, results => this.setState({ focusedIndex: null, results }));
     }
 
-    this.findByAddress(query, results => this.setState({ results }));
+    this.findByAddress(query, results => this.setState({ focusedIndex: null, results }));
   }
 
   findByAddress(query, cb) {
@@ -169,6 +175,14 @@ class ElectorateFinder extends React.Component {
     );
   }
 
+  getResultRef(el) {
+    if (!this.resultEls) {
+      this.resultEls = [];
+    }
+
+    this.resultEls.push(el);
+  }
+
   getInputRef(el) {
     this.inputEl = el;
   }
@@ -202,14 +216,56 @@ class ElectorateFinder extends React.Component {
     this.find(event);
   }
 
+  onKeyDown(event) {
+    if (this.state.results.length === 0) {
+      return;
+    }
+
+    switch (event.keyCode) {
+      case KEY_ENTER:
+        if (this.state.focusedIndex === null) {
+          this.setState({
+            focusedIndex: 0
+          });
+        }
+        break;
+      case KEY_UP:
+        event.preventDefault();
+        this.setState({
+          focusedIndex:
+            this.state.focusedIndex === null
+              ? this.state.results.length - 1
+              : this.state.focusedIndex === 0 ? null : this.state.focusedIndex - 1
+        });
+        break;
+      case KEY_DOWN:
+        event.preventDefault();
+        this.setState({
+          focusedIndex:
+            this.state.focusedIndex === null
+              ? 0
+              : this.state.focusedIndex === this.state.results.length - 1 ? null : this.state.focusedIndex + 1
+        });
+        break;
+    }
+  }
+
   pick(event) {
     this.props.onElectorateChosen(event.currentTarget.dataset.electorate);
     this.clearAll();
   }
 
+  componentDidUpdate(prevState) {
+    if (this.state.focusedIndex !== null) {
+      this.resultEls[this.state.focusedIndex].focus();
+    } else if (this.state.results.length && prevState.focusedIndex !== null) {
+      this.inputEl.focus();
+    }
+  }
+
   render() {
     return (
-      <div className={styles.root}>
+      <div className={styles.root} onKeyDown={this.onKeyDown}>
         <div ref={this.getMapRef} className={styles.map} hidden />
         <div className={cx('inner', { open: this.state.results.length })}>
           <div className={styles.search}>
@@ -225,20 +281,22 @@ class ElectorateFinder extends React.Component {
             <button className={styles.clear} onClick={this.clearAll} />
           </div>
           {this.state.results.length ? (
-            <div className={styles.results}>
-              {this.state.results.map(result => {
+            <ul className={styles.results}>
+              {this.state.results.map((result, index) => {
                 const electorate = this.props.electorates.filter(x => x.electorate_id === result)[0];
 
                 return (
                   electorate && (
-                    <button className={styles.result} key={result} data-electorate={result} onClick={this.pick}>
-                      {electorate.electorate_name}
-                      <small>{electorate.state_name}</small>
-                    </button>
+                    <li key={index} className={styles.result}>
+                      <button ref={this.getResultRef} data-electorate={result} onClick={this.pick}>
+                        {electorate.electorate_name}
+                        <small>{electorate.state_name}</small>
+                      </button>
+                    </li>
                   )
                 );
               })}
-            </div>
+            </ul>
           ) : null}
         </div>
       </div>
