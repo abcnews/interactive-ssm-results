@@ -127,7 +127,7 @@ class Divisions extends React.Component {
                       )}
                     />
                   ]
-                    .concat(this.props.result === 'y' ? [<Text>MP</Text>, <Politician key="mp" politician={this.props.mps.filter(x => x.electorate_id === electorate.electorate_id).pop()} />] : [])
+                    .concat(this.props.result === 'y' ? [<Text key="heading">MP</Text>, <Politician key="mp" politician={this.props.mps.filter(x => x.electorate_id === electorate.electorate_id).pop()} />] : [])
                     .concat([<Turnout key="turnout" electorate={electorate} />])}
                 />
               ))}
