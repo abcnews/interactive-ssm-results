@@ -25,8 +25,10 @@ const Waffle = ({ label, value, total, bold }) => {
 
   return (
     <div className={styles.root}>
-      <label className={cx('label', { bold })}>{label}</label>
-      <svg viewBox="0 0 78 78">{cells}</svg>
+      <div className={cx('label', { bold })}>{label}</div>
+      <div className={styles.aspect}>
+        <svg viewBox="0 0 78 78">{cells}</svg>
+      </div>
       <Sides>
         <Percentage value={pct} />
         <Integer value={value} />

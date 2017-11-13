@@ -1,14 +1,9 @@
 @import '../../constants.scss';
 
 .root {
-  > svg {
-    width: 100%;
-    height: auto;
-  }
 }
 
 .label {
-  display: block;
   margin-bottom: 0.5rem;
   font-size: 0.8125rem;
   text-align: center;
@@ -16,6 +11,22 @@
 
 .bold {
   font-weight: bold;
+}
+
+.aspect {
+  position: relative;
+  margin-bottom: 0.25rem;
+  padding-bottom: 100%;
+  width: 100%;
+  height: 0;
+
+  > svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .empty {
