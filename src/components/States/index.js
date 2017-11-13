@@ -4,11 +4,12 @@ const { adjective, colloquial, shareText } = require('../../util');
 const Abbreviation = require('../Abbreviation');
 const CardGrid = require('../CardGrid');
 const Count = require('../Count');
+const PoliticianGrid = require('../PoliticianGrid');
 const Share = require('../Share');
 const Text = require('../Text');
 const Turnout = require('../Turnout');
 
-const States = ({ result, electorates }) => (
+const States = ({ result, electorates, senators }) => (
   <CardGrid
     cards={electorates.map(electorate => ({
       id: electorate.electorate_id,
@@ -32,7 +33,7 @@ const States = ({ result, electorates }) => (
               <Text key="heading" heading={4} align="center">
                 {`Which ${adjective(electorate.electorate_name)} senators are likely to support same-sex marriage?`}
               </Text>,
-              <Text>[TODO: Senators]</Text>
+              <PoliticianGrid key="senators" politicians={senators.filter(x => x.electorate_id === electorate.electorate_id)} />
             ]
           : []
       )
@@ -42,12 +43,14 @@ const States = ({ result, electorates }) => (
 
 States.propTypes = {
   result: PropTypes.string,
-  electorates: PropTypes.arrayOf(PropTypes.object).isRequired
+  electorates: PropTypes.arrayOf(PropTypes.object).isRequired,
+  senators: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 States.defaultProps = {
   result: '',
-  electorate: [{}]
+  electorate: [{}],
+  senators: [{}]
 };
 
 module.exports = States;
