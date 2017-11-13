@@ -6,6 +6,7 @@ const { scrollToId, shareText } = require('../../util');
 const Card = require('../Card');
 const Count = require('../Count');
 const ElectorateFinder = require('../ElectorateFinder');
+const Politician = require('../Politician');
 const Select = require('../Select');
 const Share = require('../Share');
 const Sides = require('../Sides');
@@ -126,7 +127,7 @@ class Divisions extends React.Component {
                       )}
                     />
                   ]
-                    .concat(this.props.result === 'y' ? [<Text key="mp">[TODO: MP]</Text>] : [])
+                    .concat(this.props.result === 'y' ? [<Text>MP</Text>, <Politician key="mp" politician={this.props.mps.filter(x => x.electorate_id === electorate.electorate_id).pop()} />] : [])
                     .concat([<Turnout key="turnout" electorate={electorate} />])}
                 />
               ))}

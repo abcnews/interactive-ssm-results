@@ -17,7 +17,8 @@ class App extends React.Component {
       divisions: [],
       house: null,
       senate: null,
-      politicians: []
+      mps: [],
+      senators: []
     };
 
     this.fetchData();

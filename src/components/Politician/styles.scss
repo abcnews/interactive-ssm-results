@@ -1,0 +1,47 @@
+@import '../../constants.scss';
+
+.root {
+  
+}
+
+.vote {
+  color: $color-text-label;
+  &:before {
+    content: '';
+    display: inline-block;
+    margin-right: 0.5em;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    border: 1px solid transparent;
+    background-color: transparent;
+  }
+  &.y {
+    color: $color-text-yes;
+    &:before {
+      border-color: $color-shape-yes;
+      background-color: $color-shape-yes;
+    }
+  }
+  &.n {
+    color: $color-text-no;
+    &:before {
+      border-color: $color-shape-no;
+      background-color: $color-shape-no;
+    }
+  }
+  &.u {
+    color: $color-text-other;
+    &:before {
+      border-color: $color-shape-other;
+      background-color: $color-shape-other;
+    }
+  }
+  &.a, &.i {
+    color: $color-text-other;
+    &:before {
+      border-color: $color-shape-other;
+      background-color: transparent;
+    }
+  }
+}
