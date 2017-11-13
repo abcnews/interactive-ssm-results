@@ -23,6 +23,9 @@ const MAPBOX_GEOCODING_TYPES_ADDRESS = 'address,neighborhood,locality,place';
 const MAPBOX_GEOCODING_TYPES_POSTCODE = 'postcode';
 const MAPBOX_GEOCODING_URL_ROOT = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
 const MAPBOX_TILE_URL = `https://{s}.tiles.mapbox.com/v4/news-on1ine.1o3dijei/{z}/{x}/{y}.vector.pbf?access_token=${MAPBOX_ACCESS_TOKEN}`;
+const MAX_REMOTE_RESULTS = 3;
+
+// Proof of concept by Andrew: https://jsfiddle.net/ak22/a2p3vsgm/5/
 
 class ElectorateFinder extends React.Component {
   constructor(props) {
@@ -68,15 +71,11 @@ class ElectorateFinder extends React.Component {
     this.underneath.query(
       latLng,
       (err, results) => {
-        if (!results.length) {
-          return;
+        if (err || !results.length) {
+          return cb();
         }
 
-        cb(
-          results
-            .filter((x, index) => index === 0)
-            .map(result => electorateIdFromName(result.properties[ELECTORATE_PROPERTY]))
-        );
+        cb(electorateIdFromName(results[0].properties[ELECTORATE_PROPERTY]));
       },
       null,
       LEAFLET_UNDERNEATH_QUERY_OPTIONS
@@ -145,17 +144,32 @@ class ElectorateFinder extends React.Component {
         MAPBOX_ACCESS_TOKEN
       )}&country=au&types=${encodeURIComponent(types)}`,
       data => {
-        if (!data || !data.features[0]) {
+        if (!data || !data.features.length) {
           return;
         }
 
-        this.electorateAtLatLng(
-          L.latLng({
-            lat: data.features[0].center[1],
-            lng: data.features[0].center[0]
-          }),
-          cb
-        );
+        const results = [];
+        let numChecked = 0;
+
+        data.features.filter((feature, index) => index < MAX_REMOTE_RESULTS).forEach(feature => {
+          this.electorateAtLatLng(
+            L.latLng({
+              lat: feature.center[1],
+              lng: feature.center[0]
+            }),
+            result => {
+              numChecked++;
+
+              if (result) {
+                results.push(result);
+              }
+
+              if (numChecked === Math.min(data.features.length, MAX_REMOTE_RESULTS)) {
+                cb(unique(results));
+              }
+            }
+          );
+        });
       }
     );
   }
@@ -185,32 +199,34 @@ class ElectorateFinder extends React.Component {
     return (
       <div className={styles.root}>
         <div ref={this.getMapRef} className={styles.map} hidden />
-        <input
-          ref={this.getInputRef}
-          className={styles.input}
-          type="text"
-          autoComplete="off"
-          placeholder="Enter your address, electorate, or MP"
-          onFocus={this.init}
-          onChange={this.onInputChange}
-        />
-        {this.state.results.length ? (
-          <div className={styles.results}>
-            {this.state.results.map(result => {
-              const electorate = this.props.electorates.filter(x => x.electorate_id === result)[0];
+        <div className={styles.inner}>
+          <input
+            ref={this.getInputRef}
+            className={styles.input}
+            type="text"
+            autoComplete="off"
+            placeholder="Enter your address, electorate, or MP"
+            onFocus={this.init}
+            onChange={this.onInputChange}
+          />
+          {this.state.results.length ? (
+            <div className={styles.results}>
+              {this.state.results.map(result => {
+                const electorate = this.props.electorates.filter(x => x.electorate_id === result)[0];
 
-              return (
-                electorate && (
-                  <button className={styles.result} key={result} data-electorate={result} onClick={this.pick}>
-                    {electorate.electorate_name}
-                    {' - '}
-                    <small>{electorate.state_name}</small>
-                  </button>
-                )
-              );
-            })}
-          </div>
-        ) : null}
+                return (
+                  electorate && (
+                    <button className={styles.result} key={result} data-electorate={result} onClick={this.pick}>
+                      {electorate.electorate_name}
+                      {' - '}
+                      <small>{electorate.state_name}</small>
+                    </button>
+                  )
+                );
+              })}
+            </div>
+          ) : null}
+        </div>
       </div>
     );
   }
