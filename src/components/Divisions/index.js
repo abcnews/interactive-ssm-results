@@ -17,8 +17,8 @@ const styles = require('./styles.scss');
 const cx = classNames.bind(styles);
 
 const ATOZ = 'Alphabetically';
-const YES = 'Highest to lowest yes vote';
-const NO = 'Highest to lowest no vote';
+const YES = 'High to low yes response';
+const NO = 'High to low no response';
 const ORDERINGS = {
   [ATOZ]: (a, b) => (a.electorate_id < b.electorate_id ? -1 : a.electorate_id > b.electorate_id ? 1 : 0),
   [YES]: (a, b) => b.response_yes_percentage - a.response_yes_percentage,
@@ -117,7 +117,7 @@ class Divisions extends React.Component {
                     <Count key="count" electorate={electorate} bar percentage />
                   ]}
                   bottom={[
-                    <Count key="count" electorate={electorate} integer units={'votes'} />,
+                    <Count key="count" electorate={electorate} integer units={'responses'} />,
                     <Share
                       key="share"
                       target={electorate.electorate_id}
@@ -127,7 +127,19 @@ class Divisions extends React.Component {
                       )}
                     />
                   ]
-                    .concat(this.props.result === 'y' ? [<Text key="heading">MP</Text>, <Politician key="mp" politician={this.props.mps.filter(x => x.electorate_id === electorate.electorate_id).pop()} />] : [])
+                    .concat(
+                      this.props.result === 'y'
+                        ? [
+                            <Text key="heading">MP</Text>,
+                            <Politician
+                              key="mp"
+                              politician={this.props.mps
+                                .filter(x => x.electorate_id === electorate.electorate_id)
+                                .pop()}
+                            />
+                          ]
+                        : []
+                    )
                     .concat([<Turnout key="turnout" electorate={electorate} />])}
                 />
               ))}

@@ -16,7 +16,7 @@ const National = ({ result, electorate, house, senate }) =>
         <Text key="heading" heading={4} headingStyle={3} nomargin>
           {electorate.electorate_name}
         </Text>,
-        <Count key="count" electorate={electorate} bar integer large percentage units={'votes'} />,
+        <Count key="count" electorate={electorate} bar integer large percentage units={'responses'} />,
         <Share
           key="share"
           target={electorate.electorate_id}
