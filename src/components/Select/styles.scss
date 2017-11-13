@@ -6,7 +6,11 @@
   > select {
     margin: 0;
     border: 0;
-    padding: 0.25rem 0.5rem;
+    padding: 0.25rem 1.375rem 0.25rem 0.5rem;
+    -webkit-padding-end: 1.375rem;
+    -moz-padding-end: 1.375rem;
+    -webkit-padding-start: 0.5rem;
+    -moz-padding-start: 0.5rem;
     width: 100%;
     background-color: transparent;
     color: $color-text;
@@ -20,10 +24,6 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
-    -webkit-padding-end: 1.375rem;
-    -moz-padding-end: 1.375rem;
-    -webkit-padding-start: 0.5rem;
-    -moz-padding-start: 0.5rem;
 
     &::-ms-value {
       color: $color-text;
