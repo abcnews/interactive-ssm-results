@@ -1,13 +1,13 @@
 const PropTypes = require('prop-types');
 const React = require('react');
-const { nowrap } = require('../../util');
+const { colloquial, nowrap } = require('../../util');
 const Text = require('../Text');
 const WaffleGrid = require('../WaffleGrid');
 
 const Turnout = ({ electorate }) => [
   <Text key="heading" heading={4} align={'center'}>
     {`Who returned their ballot${electorate.electorate_level !== 'national'
-      ? ` in ${nowrap(electorate.electorate_name)}`
+      ? ` in ${colloquial(nowrap(electorate.electorate_name))}`
       : ''}?`}
   </Text>,
   <WaffleGrid

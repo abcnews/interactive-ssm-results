@@ -6,6 +6,9 @@ const IAN = 'ian';
 
 module.exports.adjective = text => text.replace(ENDS_IN_IA, IAN);
 
+module.exports.colloquial = (name, shouldUpcase) =>
+  name.indexOf('Territory') > -1 ? `${shouldUpcase ? 'The' : 'the'} ${name}` : name;
+
 module.exports.nowrap = text => text.replace(WHITESPACE, NBSP);
 
 module.exports.scrollToId = id =>
