@@ -25,7 +25,7 @@ const MAPBOX_GEOCODING_TYPES_ADDRESS = 'address,neighborhood,locality,place';
 const MAPBOX_GEOCODING_TYPES_POSTCODE = 'postcode';
 const MAPBOX_GEOCODING_URL_ROOT = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
 const MAPBOX_TILE_URL = `https://{s}.tiles.mapbox.com/v4/news-on1ine.1o3dijei/{z}/{x}/{y}.vector.pbf?access_token=${MAPBOX_ACCESS_TOKEN}`;
-const MAX_REMOTE_RESULTS = 3;
+const MAX_RESULTS = 3;
 
 // Proof of concept by Andrew: https://jsfiddle.net/ak22/a2p3vsgm/5/
 
@@ -129,6 +129,7 @@ class ElectorateFinder extends React.Component {
           return memo.concat([item.electorate_id]);
         }, [])
         .sort()
+        .filter((result, index) => index < MAX_RESULTS)
     );
   }
 
@@ -145,7 +146,7 @@ class ElectorateFinder extends React.Component {
         const results = [];
         let numChecked = 0;
 
-        data.features.filter((feature, index) => index < MAX_REMOTE_RESULTS).forEach(feature => {
+        data.features.filter((feature, index) => index < MAX_RESULTS).forEach(feature => {
           this.electorateAtLatLng(
             L.latLng({
               lat: feature.center[1],
@@ -158,7 +159,7 @@ class ElectorateFinder extends React.Component {
                 results.push(result);
               }
 
-              if (numChecked === Math.min(data.features.length, MAX_REMOTE_RESULTS)) {
+              if (numChecked === Math.min(data.features.length, MAX_RESULTS)) {
                 cb(unique(results));
               }
             }
