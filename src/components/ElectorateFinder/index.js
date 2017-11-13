@@ -1,11 +1,13 @@
+const classNames = require('classnames/bind');
 const debounce = require('debounce');
 const loadScript = require('load-script');
 const React = require('react');
 const PropTypes = require('prop-types');
 const unique = require('array-unique');
 const xhr = require('xhr');
-
 const styles = require('./styles.scss');
+
+const cx = classNames.bind(styles);
 
 const DEBOUNCE_PERIOD = 500;
 const ELECTORATE_PROPERTY = 'Elect_div';
@@ -199,7 +201,7 @@ class ElectorateFinder extends React.Component {
     return (
       <div className={styles.root}>
         <div ref={this.getMapRef} className={styles.map} hidden />
-        <div className={styles.inner}>
+        <div className={cx('inner', { open: this.state.results.length })}>
           <input
             ref={this.getInputRef}
             className={styles.input}
@@ -218,7 +220,6 @@ class ElectorateFinder extends React.Component {
                   electorate && (
                     <button className={styles.result} key={result} data-electorate={result} onClick={this.pick}>
                       {electorate.electorate_name}
-                      {' - '}
                       <small>{electorate.state_name}</small>
                     </button>
                   )
