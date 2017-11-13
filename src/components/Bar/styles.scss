@@ -20,14 +20,17 @@
     }
 
     &::-webkit-progress-value {
+      box-shadow: 0 0 0 1px #fff;
       background: $color-shape-yes;
     }
 
     &::-moz-progress-bar {
+      box-shadow: 0 0 0 1px #fff;
       background: $color-shape-yes;
     }
 
     &::-ms-fill {
+      box-shadow: 0 0 0 1px #fff;
       background: $color-shape-yes;
     }
   }
