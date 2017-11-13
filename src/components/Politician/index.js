@@ -15,7 +15,7 @@ const Politician = ({ politician }) => ([
 ]);
 
 Politician.propTypes = {
-  politician: PropTypes.array
+  politician: PropTypes.object
 };
 
 Politician.defaultProps = {
