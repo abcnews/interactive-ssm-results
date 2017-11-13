@@ -160,7 +160,7 @@ class ElectorateFinder extends React.Component {
               }
 
               if (numChecked === Math.min(data.features.length, MAX_RESULTS)) {
-                cb(unique(results));
+                cb(unique(results.sort()));
               }
             }
           );
