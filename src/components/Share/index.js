@@ -1,6 +1,6 @@
-const copyTextToClipboard = require('copy-text-to-clipboard');
 const PropTypes = require('prop-types');
 const React = require('react');
+const { copyTextToClipboard } = require('../../util');
 const Sides = require('../Sides');
 const styles = require('./styles.scss');
 

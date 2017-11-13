@@ -8,7 +8,7 @@ const styles = require('./styles.scss');
 
 const cx = classNames.bind(styles);
 
-const RANGE = [...Array(100).keys()];
+const RANGE = Array.apply(0, Array(100)).map((x, i) => i);
 
 const Waffle = ({ label, value, total, bold }) => {
   const pct = value / total || 0;

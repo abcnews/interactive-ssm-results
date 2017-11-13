@@ -12,11 +12,11 @@ const Integer = ({ value, units, yes, no, large }) => {
   let digits;
   let sizeLabel;
 
-  for (let size of SIZES) {
-    if (Math.abs(value) >= size[0]) {
-      divisor = size[0];
-      digits = size[1];
-      sizeLabel = size[large ? 2 : 3];
+  for (let i = 0, len = SIZES.length; i < len; i++) {
+    if (Math.abs(value) >= SIZES[i][0]) {
+      divisor = SIZES[i][0];
+      digits = SIZES[i][1];
+      sizeLabel = SIZES[i][large ? 2 : 3];
 
       break;
     }
