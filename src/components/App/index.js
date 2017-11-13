@@ -51,7 +51,7 @@ class App extends React.Component {
           house={this.state.house}
           senate={this.state.senate}
         />
-        <States result={this.state.result} electorates={this.state.states} />
+        <States result={this.state.result} electorates={this.state.states} senators={this.state.senators} />
         <Divisions result={this.state.result} electorates={this.state.divisions} mps={this.state.mps} />
       </div>
     );
