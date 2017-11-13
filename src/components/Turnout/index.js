@@ -6,7 +6,7 @@ const WaffleGrid = require('../WaffleGrid');
 
 const Turnout = ({ electorate }) => [
   <Text key="heading" heading={4} align={'center'}>
-    {`Who returned their ballot${electorate.electorate_level !== 'national'
+    {`Who returned their survey${electorate.electorate_level !== 'national'
       ? ` in ${colloquial(nowrap(electorate.electorate_name))}`
       : ''}?`}
   </Text>,
