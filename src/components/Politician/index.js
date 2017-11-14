@@ -3,7 +3,7 @@ const React = require('react');
 const styles = require('./styles.scss');
 
 const Politician = ({ politician }) => [
-  <div className={styles.root}>
+  <div key={politician.politician_name} className={styles.root}>
     <div>{politician.politician_name}</div>
     <div className={styles.party}>{politician.party_name}</div>
     <div className={`${styles.vote} ${styles[politician.vote_id]}`}>
