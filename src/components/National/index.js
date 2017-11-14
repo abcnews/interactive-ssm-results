@@ -23,17 +23,13 @@ const National = ({ result, electorate, house, senate }) =>
           text={shareText('Australia', electorate.response_yes_percentage)}
         />
       ]}
-      bottom={[
-        <Turnout key="turnout" electorate={electorate} />,
-        <Text key="heading-next" heading={4} align="center">
-          So what happens next?
-        </Text>
-      ].concat(
+      bottom={[<Turnout key="turnout" electorate={electorate} />].concat(
         result === 'y'
           ? [
-              <Text key="text-result-yes-pre" todo>
-                [TODO: Stuff about what we think will happen in parliament due to Yes result.]
+              <Text key="heading-next" heading={4} align="center">
+                So what happens next?
               </Text>,
+              <Text key="next-house">{house.what_happens_next}</Text>,
               <Text key="heading-house" heading={5} headingStyle={4} nomargin>
                 {house.house_name}
               </Text>,
@@ -43,17 +39,9 @@ const National = ({ result, electorate, house, senate }) =>
                 {senate.house_name}
               </Text>,
               <Count key="count-senate" electorate={senate} bar integer percentage prediction units={'members'} />,
-              <Text key="text-result-yes-post">
-                [TODO: More stuff about what we think will happen in parliament due to Yes result.]
-              </Text>
+              <Text key="next-senate">{senate.what_happens_next}</Text>
             ]
-          : [
-              <Text key="text-result-no" todo>
-                Stuff about what we think will happen in parliament due to No result. There is such a lot of talk going
-                around about branding, but how do you use it to help you reach more people and market your products or
-                services?
-              </Text>
-            ]
+          : []
       )}
     />
   );
