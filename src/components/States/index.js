@@ -9,7 +9,7 @@ const Share = require('../Share');
 const Text = require('../Text');
 const Turnout = require('../Turnout');
 
-const States = ({ result, electorates, senators }) => (
+const States = ({ electorates, senators }) => (
   <CardGrid
     cards={electorates.map(electorate => ({
       id: electorate.electorate_id,
@@ -26,29 +26,25 @@ const States = ({ result, electorates, senators }) => (
           target={electorate.electorate_id}
           text={shareText(colloquial(electorate.electorate_name, true), electorate.response_yes_percentage)}
         />,
-        <Turnout key="turnout" electorate={electorate} />
-      ].concat(
-        result === 'y'
-          ? [
-              <Text key="heading" heading={4} align="center">
-                {`Which ${adjective(electorate.electorate_name)} senators are likely to support same-sex marriage?`}
-              </Text>,
-              <PoliticianGrid key="senators" politicians={senators.filter(x => x.electorate_id === electorate.electorate_id)} />
-            ]
-          : []
-      )
+        <Turnout key="turnout" electorate={electorate} />,
+        <Text key="heading" heading={4} align="center">
+          {`Which ${adjective(electorate.electorate_name)} senators are likely to support same-sex marriage?`}
+        </Text>,
+        <PoliticianGrid
+          key="senators"
+          politicians={senators.filter(x => x.electorate_id === electorate.electorate_id)}
+        />
+      ]
     }))}
   />
 );
 
 States.propTypes = {
-  result: PropTypes.string,
   electorates: PropTypes.arrayOf(PropTypes.object).isRequired,
   senators: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 States.defaultProps = {
-  result: '',
   electorate: [{}],
   senators: [{}]
 };

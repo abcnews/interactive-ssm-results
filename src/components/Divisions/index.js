@@ -125,24 +125,16 @@ class Divisions extends React.Component {
                         `The electorate of ${electorate.electorate_name}`,
                         electorate.response_yes_percentage
                       )}
-                    />
-                  ]
-                    .concat(
-                      this.props.result === 'y'
-                        ? [
-                            <Text key="heading" heading={6}>
-                              MP
-                            </Text>,
-                            <Politician
-                              key="mp"
-                              politician={this.props.mps
-                                .filter(x => x.electorate_id === electorate.electorate_id)
-                                .pop()}
-                            />
-                          ]
-                        : []
-                    )
-                    .concat([<Turnout key="turnout" electorate={electorate} />])}
+                    />,
+                    <Text key="heading" heading={6}>
+                      MP
+                    </Text>,
+                    <Politician
+                      key="mp"
+                      politician={this.props.mps.filter(x => x.electorate_id === electorate.electorate_id).pop()}
+                    />,
+                    <Turnout key="turnout" electorate={electorate} />
+                  ]}
                 />
               ))}
           </div>
