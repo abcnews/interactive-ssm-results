@@ -14,6 +14,7 @@ const ELECTORATE_PROPERTY = 'Elect_div';
 const JS_LEAFLET = 'https://unpkg.com/leaflet@1.2.0/dist/leaflet.js';
 const JS_LEAFLET_UNDERNEATH = 'https://unpkg.com/leaflet-underneath@3.0.0/dist/leaflet-underneath.js';
 const KEY_ENTER = 13;
+const KEY_ESCAPE = 27;
 const KEY_UP = 38;
 const KEY_DOWN = 40;
 const LEAFLET_LAT_LNG = { lat: -35.3082, lng: 149.1244 };
@@ -224,6 +225,9 @@ class ElectorateFinder extends React.Component {
     }
 
     switch (event.keyCode) {
+      case KEY_ESCAPE:
+        this.clearAll();
+        break;
       case KEY_ENTER:
         if (this.state.focusedIndex === null) {
           this.setState({
