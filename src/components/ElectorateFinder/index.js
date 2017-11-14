@@ -128,7 +128,9 @@ class ElectorateFinder extends React.Component {
     return unique(
       list
         .reduce((memo, item) => {
-          if (item[key].toLowerCase().substr(0, query.length) !== _query) {
+          const terms = item[key].split(' ').concat([item[key]]);
+
+          if (terms.every(term => term.toLowerCase().substr(0, query.length) !== _query)) {
             return memo;
           }
 
