@@ -5,7 +5,7 @@ const styles = require('./styles.scss');
 
 const cx = classNames.bind(styles);
 
-const Text = ({ heading, headingStyle, align, nomargin, children }) =>
+const Text = ({ heading, headingStyle, align, nomargin, style, children }) =>
   React.createElement(
     heading ? `h${heading}` : 'p',
     {
@@ -14,7 +14,8 @@ const Text = ({ heading, headingStyle, align, nomargin, children }) =>
         p: !heading,
         [align]: align,
         nomargin
-      })
+      }),
+      style
     },
     children
   );
