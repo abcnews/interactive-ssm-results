@@ -12,6 +12,7 @@
     -webkit-padding-start: 0.5rem;
     -moz-padding-start: 0.5rem;
     width: 100%;
+    height: 1.5rem;
     background-color: transparent;
     color: $color-text;
     font-family: inherit;
@@ -31,6 +32,10 @@
 
     &::-ms-expand {
       display: none;
+    }
+
+    > option {
+      padding: 0; // Override News styling
     }
   }
 

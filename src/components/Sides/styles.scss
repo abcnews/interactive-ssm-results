@@ -2,11 +2,15 @@
   display: flex;
   justify-content: space-between;
 
+  &:first-child {
+    margin-top: 0.125rem;
+  }
+
   & > :last-child {
     text-align: right;
   }
 
   & > * > :first-child ~ * {
-    margin-top: 0.125rem;
+    margin-top: 0.25rem;
   }
 }
