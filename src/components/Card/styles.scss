@@ -120,6 +120,7 @@
   width: 100%;
   background: none;
   text-align: right;
+  cursor: pointer;
 
   &:first-child {
     position: absolute;
@@ -127,7 +128,6 @@
     top: 0;
     left: 0;
     padding: 0.5rem 0.75rem 3.25rem;
-    cursor: pointer;
   }
 
   &:focus,
