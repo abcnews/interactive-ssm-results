@@ -10,7 +10,7 @@ const Politician = ({ politician }) => ([
   <div className={styles.root}>
     <div>{politician.politician_name}</div>
     <div className={cx('party', politician.party_code )}>{politician.party_name}</div>
-    <div className={cx('vote', politician.vote_id )}>{politician.vote_name}</div>
+    <div className={cx('vote', politician.vote_id )}>{politician.vote_name_override || politician.vote_name}</div>
   </div>
 ]);
 
