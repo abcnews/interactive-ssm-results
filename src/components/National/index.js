@@ -23,12 +23,14 @@ const National = ({ result, electorate, house, senate }) =>
           text={shareText('Australia', electorate.response_yes_percentage)}
         />
       ]}
-      bottom={[<Turnout key="turnout" electorate={electorate} />].concat(
+      bottom={[
+        <Turnout key="turnout" electorate={electorate} />,
+        <Text key="heading-next" heading={4} align="center">
+          So what happens next?
+        </Text>
+      ].concat(
         result === 'y'
           ? [
-              <Text key="heading-next" heading={4} align="center">
-                So what happens next?
-              </Text>,
               <Text key="next-house">{house.what_happens_next}</Text>,
               <Text key="heading-house" heading={5} headingStyle={4} nomargin>
                 {house.house_name}
@@ -41,7 +43,10 @@ const National = ({ result, electorate, house, senate }) =>
               <Count key="count-senate" electorate={senate} bar integer percentage prediction units={'members'} />,
               <Text key="next-senate">{senate.what_happens_next}</Text>
             ]
-          : []
+          : [
+              <Text key="next-house">{house.what_happens_next}</Text>,
+              <Text key="next-senate">{senate.what_happens_next}</Text>
+            ]
       )}
     />
   );
