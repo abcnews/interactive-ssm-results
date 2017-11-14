@@ -130,7 +130,9 @@ class Divisions extends React.Component {
                     .concat(
                       this.props.result === 'y'
                         ? [
-                            <Text key="heading">MP</Text>,
+                            <Text key="heading" heading={6}>
+                              MP
+                            </Text>,
                             <Politician
                               key="mp"
                               politician={this.props.mps

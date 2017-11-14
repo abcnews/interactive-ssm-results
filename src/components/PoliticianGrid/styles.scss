@@ -5,8 +5,14 @@
   margin: 0 auto;
   max-width: 30rem;
 
-  & > * {
-    margin: 0 0.5rem 1.5rem;
-    width: 42%;
+  & > *,
+  &.odd::after {
+    margin: 0 0.5rem 1rem;
+    width: 100%; // IE needs this
+    max-width: 42%;
+  }
+
+  &.odd::after {
+    content: '';
   }
 }

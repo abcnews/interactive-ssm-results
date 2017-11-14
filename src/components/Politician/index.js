@@ -1,18 +1,16 @@
-const classNames = require('classnames/bind');
 const PropTypes = require('prop-types');
 const React = require('react');
-// const Text = require('../Text');
 const styles = require('./styles.scss');
 
-const cx = classNames.bind(styles);
-
-const Politician = ({ politician }) => ([
+const Politician = ({ politician }) => [
   <div className={styles.root}>
     <div>{politician.politician_name}</div>
-    <div className={cx('party', politician.party_code )}>{politician.party_name_short}</div>
-    <div className={cx('vote', politician.vote_id )}>{politician.vote_name_override || politician.vote_name}</div>
+    <div className={styles.party}>{politician.party_name}</div>
+    <div className={`${styles.vote} ${styles[politician.vote_id]}`}>
+      {politician.vote_name_override || politician.vote_name}
+    </div>
   </div>
-]);
+];
 
 Politician.propTypes = {
   politician: PropTypes.object

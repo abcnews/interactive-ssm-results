@@ -60,7 +60,10 @@
 .h6 {
   composes: h;
 
-  font-size: 0.6875rem;
+  margin-bottom: 0;
+  font-family: ABCSans, Helvetica, Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: bold;
 }
 
 .left {
