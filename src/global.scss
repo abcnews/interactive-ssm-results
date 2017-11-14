@@ -1,12 +1,12 @@
 @import './constants.scss';
 
 :global .u-quote {
-  margin: 0 auto;
-  max-width: 17rem;
-  font-size: 1.3rem;
+  margin: 0 auto !important;
+  max-width: 17rem !important;
+  font-size: 1.3rem !important;
 
   @media #{$mq-not-sm} {
-    max-width: 28rem;
-    font-size: 1.45rem;
+    max-width: 28rem !important;
+    font-size: 1.45rem !important;
   }
 }
