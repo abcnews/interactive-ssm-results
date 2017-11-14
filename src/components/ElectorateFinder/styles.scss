@@ -81,7 +81,9 @@
 }
 
 .result {
+  margin: 0;
   padding: 0.5rem 0;
+  background: none !important;
 
   & + & {
     border-top: 0.0625rem solid #bbb;
