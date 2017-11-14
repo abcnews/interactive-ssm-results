@@ -1,5 +1,6 @@
 const React = require('react');
 const { render } = require('react-dom');
+require('./global.scss');
 
 const PROJECT_NAME = 'interactive-ssm-results';
 const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
