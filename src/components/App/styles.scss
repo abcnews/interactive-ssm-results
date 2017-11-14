@@ -3,5 +3,12 @@
 .root {
   margin-bottom: 2rem;
   color: $color-text;
-  font-family: ABCSans, Helvetica, Arial, sans-serif;
+
+  &,
+  & button,
+  & input,
+  & select,
+  & textarea {
+    font-family: ABCSans, Helvetica, Arial, sans-serif;
+  }
 }

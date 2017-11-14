@@ -32,7 +32,7 @@
   margin-bottom: 0.625rem;
   border: 0.0625rem solid rgba(0, 0, 0, 0.15);
   border-radius: 0.125rem;
-  padding: 0.75rem 0.75rem 0.375rem;
+  padding: 0.75rem 0.75rem 0.5rem;
   box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.15);
   background-color: #fff;
 }
@@ -94,7 +94,7 @@
   display: none;
   position: absolute;
   z-index: 2;
-  top: calc(100% - 0.375rem);
+  top: calc(100% - 0.3125rem);
   left: 0.75rem;
   width: calc(100% - 1.5rem);
   animation: nudgeIn 0.5s backwards;
@@ -116,7 +116,7 @@
 .more {
   margin: 0;
   border: 0;
-  padding: 0.5rem 0 0 0;
+  padding: 0.5625rem 0 0 0;
   width: 100%;
   background: none;
   text-align: right;
@@ -127,7 +127,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    padding: 0.5rem 0.75rem 3.25rem;
+    padding: 0.5625rem 0.75rem 3.25rem;
   }
 
   &:focus,
@@ -153,7 +153,8 @@
 
 .less:last-child {
   position: static;
-  padding: 0.5rem 0 0 0;
+  transform: translate(0, 0.5rem);
+  padding: 0.5rem 0;
 }
 
 .less::after {
