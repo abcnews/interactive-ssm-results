@@ -7713,6 +7713,7 @@
       "party_name_short": "Lambie Network",
       "vote_id": "i",
       "vote_name": "Ineligible to vote",
+      "vote_name_override": "Resigned and cannot vote",
       "internal_notes": "State"
     },
     {
