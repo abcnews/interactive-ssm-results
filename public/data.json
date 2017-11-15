@@ -5237,10 +5237,10 @@
       "house_name": "Senate",
       "result": "y",
       "what_happens_next": "According to research by the ABC, a vote on a same-sex marriage bill will pass both houses of parliament.",
-      "response_yes_count": 54,
-      "response_yes_percentage": 0.9152542372881356,
+      "response_yes_count": 53,
+      "response_yes_percentage": 0.9137931034482759,
       "response_no_count": 5,
-      "response_no_percentage": 0.0847457627118644
+      "response_no_percentage": 0.08620689655172409
     }
   ],
   [
@@ -7854,13 +7854,13 @@
       "electorate_id": "nsw",
       "electorate_name": "New South Wales",
       "electorate_name_short": "NSW",
-      "politician_name": "Hollie Hughes",
+      "politician_name": "Fiona Nash",
       "party_id": "NAT",
       "party_name": "National Party",
       "party_name_short": "National",
-      "vote_id": "y",
-      "vote_name": "Likely to support",
-      "vote_name_override": "Likely to support if eligible to sit in Senate"
+      "vote_id": "i",
+      "vote_name": "Ineligible to vote",
+      "vote_name_override": "Ineligible to have been elected and cannot vote"
     },
     {
       "house_id": "s",
