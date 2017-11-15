@@ -61,3 +61,9 @@ module.exports.scrollToId = id =>
 
 module.exports.shareText = (place, pctYes) =>
   `${place} has ${(pctYes * 100).toFixed(1)}% support for legalising same-sex marriage`;
+
+module.exports.track = (type, data) => {
+  if (window.ABC && ABC.News && ABC.News.Logger) {
+    ABC.News.Logger.log('interactive-ssm-results', type, data || {}, true);
+  }
+};

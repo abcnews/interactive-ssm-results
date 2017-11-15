@@ -1,4 +1,5 @@
 const React = require('react');
+const { track } = require('../../util');
 const Card = require('../Card');
 const styles = require('./styles.scss');
 
@@ -17,7 +18,13 @@ class CardGrid extends React.Component {
   }
 
   onToggle(id) {
-    this.setState({ openId: this.state.openId === id ? null : id });
+    const openId = this.state.openId === id ? null : id;
+
+    this.setState({ openId });
+
+    if (openId) {
+      track('open-card', { id });
+    }
   }
 
   render() {

@@ -1,7 +1,7 @@
 const classNames = require('classnames/bind');
 const PropTypes = require('prop-types');
 const React = require('react');
-const { scrollToId } = require('../../util');
+const { scrollToId, track } = require('../../util');
 const styles = require('./styles.scss');
 
 const cx = classNames.bind(styles);
@@ -20,9 +20,13 @@ class Card extends React.Component {
   }
 
   toggle() {
-    this.setState({
-      open: !this.state.open
-    });
+    const open = !this.state.open;
+
+    this.setState({ open });
+
+    if (open) {
+      track('open-card', { id: this.props.id });
+    }
   }
 
   componentDidMount() {

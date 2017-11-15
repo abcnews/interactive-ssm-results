@@ -5,6 +5,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const unique = require('array-unique');
 const xhr = require('xhr');
+const { track } = require('../../util');
 const styles = require('./styles.scss');
 
 const cx = classNames.bind(styles);
@@ -257,8 +258,11 @@ class ElectorateFinder extends React.Component {
   }
 
   pick(event) {
-    this.props.onElectorateChosen(event.currentTarget.dataset.electorate);
+    const electorate = event.currentTarget.dataset.electorate;
+
+    this.props.onElectorateChosen(electorate);
     this.clearAll();
+    track('pick-result', { electorate });
   }
 
   componentDidUpdate(prevState) {

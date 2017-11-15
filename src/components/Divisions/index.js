@@ -2,7 +2,7 @@ const classNames = require('classnames/bind');
 const PropTypes = require('prop-types');
 const React = require('react');
 const { StickyContainer, Sticky } = require('react-sticky');
-const { scrollToId, shareText } = require('../../util');
+const { scrollToId, shareText, track } = require('../../util');
 const Card = require('../Card');
 const Count = require('../Count');
 const ElectorateFinder = require('../ElectorateFinder');
@@ -39,7 +39,10 @@ class Divisions extends React.Component {
   }
 
   reorder(event) {
-    this.setState({ order: event.target.value });
+    const order = event.target.value;
+
+    this.setState({ order });
+    track('sort-electorates', { order });
   }
 
   handleElectorateChoice(id) {
