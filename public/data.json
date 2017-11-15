@@ -5227,10 +5227,10 @@
       "house_name": "House of Representatives",
       "result": "y",
       "what_happens_next": "Malcolm Turnbull has pledged to introduce a bill in parliament and has stated he intends for same-sex marriage to be legalised by the end of the year. The bill may be negotiated by MPs seeking laws that would allow businesses to discriminate against same-sex couples. This may delay the passage of the bill. This is what MPs have told the ABC they are likely to do:",
-      "response_yes_count": 114,
-      "response_yes_percentage": 0.9743589743589743,
+      "response_yes_count": 113,
+      "response_yes_percentage": 0.9741379310344828,
       "response_no_count": 3,
-      "response_no_percentage": 0.02564102564102566
+      "response_no_percentage": 0.025862068965517238
     },
     {
       "house_id": "s",
@@ -5570,8 +5570,9 @@
       "party_id": "NAT",
       "party_name": "National Party",
       "party_name_short": "National",
-      "vote_id": "y",
-      "vote_name": "Likely to support",
+      "vote_id": "u",
+      "vote_name": "Unclear",
+      "vote_name_override": "Depends on bill",
       "internal_notes": "Electorate"
     },
     {
