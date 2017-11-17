@@ -34,6 +34,7 @@ class Card extends React.Component {
       history.replaceState({}, '', window.location.pathname);
       this.toggle();
       setTimeout(scrollToId, 300, this.props.id);
+      track('deep-link', { id: this.props.id });
     }
   }
 
