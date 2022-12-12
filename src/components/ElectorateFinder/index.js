@@ -6,14 +6,15 @@ const PropTypes = require('prop-types');
 const unique = require('array-unique');
 const xhr = require('xhr');
 const { track } = require('../../util');
-const styles = require('./styles.scss');
+const styles = require('./styles.scss').default;
 
 const cx = classNames.bind(styles);
 
 const DEBOUNCE_PERIOD = 500;
 const ELECTORATE_PROPERTY = 'Elect_div';
 const JS_LEAFLET = 'https://unpkg.com/leaflet@1.2.0/dist/leaflet.js';
-const JS_LEAFLET_UNDERNEATH = 'https://unpkg.com/leaflet-underneath@3.0.0/dist/leaflet-underneath.js';
+const JS_LEAFLET_UNDERNEATH =
+  'https://unpkg.com/leaflet-underneath@3.0.0/dist/leaflet-underneath.js';
 const KEY_ENTER = 13;
 const KEY_ESCAPE = 27;
 const KEY_UP = 38;
@@ -21,14 +22,17 @@ const KEY_DOWN = 40;
 const LEAFLET_LAT_LNG = { lat: -35.3082, lng: 149.1244 };
 const LEAFLET_ZOOM = 11;
 const LEAFLET_UNDERNEATH_DEFAULT_RADIUS = 1;
-const LEAFLET_UNDERNEATH_FEATURE_ID = feature => feature.properties[ELECTORATE_PROPERTY];
+const LEAFLET_UNDERNEATH_FEATURE_ID = (feature) =>
+  feature.properties[ELECTORATE_PROPERTY];
 const LEAFLET_UNDERNEATH_LAYERS = ['ssm-2017-electorates-ao2dkw'];
 const LEAFLET_UNDERNEATH_QUERY_OPTIONS = { onlyInside: true };
 const LEAFLET_UNDERNEATH_SUBDOMAINS = ['a', 'b', 'c', 'd'];
-const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoibmV3cy1vbjFpbmUiLCJhIjoiR3FlZFZlVSJ9._30EFE9XYhQitqf4gzRG-g';
+const MAPBOX_ACCESS_TOKEN =
+  'pk.eyJ1IjoibmV3cy1vbjFpbmUiLCJhIjoiR3FlZFZlVSJ9._30EFE9XYhQitqf4gzRG-g';
 const MAPBOX_GEOCODING_TYPES_ADDRESS = 'address,neighborhood,locality,place';
 const MAPBOX_GEOCODING_TYPES_POSTCODE = 'postcode';
-const MAPBOX_GEOCODING_URL_ROOT = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
+const MAPBOX_GEOCODING_URL_ROOT =
+  'https://api.mapbox.com/geocoding/v5/mapbox.places/';
 const MAPBOX_TILE_URL = `https://{s}.tiles.mapbox.com/v4/news-on1ine.1o3dijei/{z}/{x}/{y}.vector.pbf?access_token=${MAPBOX_ACCESS_TOKEN}`;
 const MAX_RESULTS = 3;
 
@@ -102,10 +106,14 @@ class ElectorateFinder extends React.Component {
     }
 
     if (query == +query) {
-      return this.findByPostcode(query, results => this.setState({ focusedIndex: null, results }));
+      return this.findByPostcode(query, (results) =>
+        this.setState({ focusedIndex: null, results })
+      );
     }
 
-    this.findByAddress(query, results => this.setState({ focusedIndex: null, results }));
+    this.findByAddress(query, (results) =>
+      this.setState({ focusedIndex: null, results })
+    );
   }
 
   findByAddress(query, cb) {
@@ -132,7 +140,11 @@ class ElectorateFinder extends React.Component {
         .reduce((memo, item) => {
           const terms = item[key].split(' ').concat([item[key]]);
 
-          if (terms.every(term => term.toLowerCase().substr(0, query.length) !== _query)) {
+          if (
+            terms.every(
+              (term) => term.toLowerCase().substr(0, query.length) !== _query
+            )
+          ) {
             return memo;
           }
 
@@ -145,10 +157,12 @@ class ElectorateFinder extends React.Component {
 
   findRemote(query, types, cb) {
     fetchJSON(
-      `${MAPBOX_GEOCODING_URL_ROOT}${encodeURIComponent(query)}.json?access_token=${encodeURIComponent(
+      `${MAPBOX_GEOCODING_URL_ROOT}${encodeURIComponent(
+        query
+      )}.json?access_token=${encodeURIComponent(
         MAPBOX_ACCESS_TOKEN
       )}&country=au&types=${encodeURIComponent(types)}`,
-      data => {
+      (data) => {
         if (!data || !data.features.length) {
           return;
         }
@@ -156,25 +170,29 @@ class ElectorateFinder extends React.Component {
         const results = [];
         let numChecked = 0;
 
-        data.features.filter((feature, index) => index < MAX_RESULTS).forEach(feature => {
-          this.electorateAtLatLng(
-            L.latLng({
-              lat: feature.center[1],
-              lng: feature.center[0]
-            }),
-            result => {
-              numChecked++;
+        data.features
+          .filter((feature, index) => index < MAX_RESULTS)
+          .forEach((feature) => {
+            this.electorateAtLatLng(
+              L.latLng({
+                lat: feature.center[1],
+                lng: feature.center[0],
+              }),
+              (result) => {
+                numChecked++;
 
-              if (result) {
-                results.push(result);
-              }
+                if (result) {
+                  results.push(result);
+                }
 
-              if (numChecked === Math.min(data.features.length, MAX_RESULTS)) {
-                cb(unique(results.sort()));
+                if (
+                  numChecked === Math.min(data.features.length, MAX_RESULTS)
+                ) {
+                  cb(unique(results.sort()));
+                }
               }
-            }
-          );
-        });
+            );
+          });
       }
     );
   }
@@ -208,7 +226,7 @@ class ElectorateFinder extends React.Component {
         featureId: LEAFLET_UNDERNEATH_FEATURE_ID,
         defaultRadius: LEAFLET_UNDERNEATH_DEFAULT_RADIUS,
         layers: LEAFLET_UNDERNEATH_LAYERS,
-        subdomains: LEAFLET_UNDERNEATH_SUBDOMAINS
+        subdomains: LEAFLET_UNDERNEATH_SUBDOMAINS,
       });
     });
   }
@@ -232,7 +250,7 @@ class ElectorateFinder extends React.Component {
       case KEY_ENTER:
         if (this.state.focusedIndex === null) {
           this.setState({
-            focusedIndex: 0
+            focusedIndex: 0,
           });
         }
         break;
@@ -242,7 +260,9 @@ class ElectorateFinder extends React.Component {
           focusedIndex:
             this.state.focusedIndex === null
               ? this.state.results.length - 1
-              : this.state.focusedIndex === 0 ? null : this.state.focusedIndex - 1
+              : this.state.focusedIndex === 0
+              ? null
+              : this.state.focusedIndex - 1,
         });
         break;
       case KEY_DOWN:
@@ -251,7 +271,9 @@ class ElectorateFinder extends React.Component {
           focusedIndex:
             this.state.focusedIndex === null
               ? 0
-              : this.state.focusedIndex === this.state.results.length - 1 ? null : this.state.focusedIndex + 1
+              : this.state.focusedIndex === this.state.results.length - 1
+              ? null
+              : this.state.focusedIndex + 1,
         });
         break;
     }
@@ -293,12 +315,18 @@ class ElectorateFinder extends React.Component {
           {this.state.results.length ? (
             <ul className={styles.results}>
               {this.state.results.map((result, index) => {
-                const electorate = this.props.electorates.filter(x => x.electorate_id === result)[0];
+                const electorate = this.props.electorates.filter(
+                  (x) => x.electorate_id === result
+                )[0];
 
                 return (
                   electorate && (
                     <li key={index} className={styles.result}>
-                      <button ref={this.getResultRef} data-electorate={result} onClick={this.pick}>
+                      <button
+                        ref={this.getResultRef}
+                        data-electorate={result}
+                        onClick={this.pick}
+                      >
                         {electorate.electorate_name}
                         <small>{electorate.state_name}</small>
                       </button>
@@ -317,16 +345,18 @@ class ElectorateFinder extends React.Component {
 ElectorateFinder.propTypes = {
   electorates: PropTypes.arrayOf(PropTypes.object),
   mps: PropTypes.arrayOf(PropTypes.object),
-  onElectorateChosen: PropTypes.func
+  onElectorateChosen: PropTypes.func,
 };
 
 ElectorateFinder.defaultProps = {
   electorates: [],
   mps: [],
-  onElectorateChosen: electorate => console.debug(`Electorate chosen: ${electorate}`)
+  onElectorateChosen: (electorate) =>
+    console.debug(`Electorate chosen: ${electorate}`),
 };
 
-const electorateIdFromName = name => name.toLowerCase().replace(/[^a-z]/g, '');
+const electorateIdFromName = (name) =>
+  name.toLowerCase().replace(/[^a-z]/g, '');
 
 const cachedJSON = {};
 
@@ -338,7 +368,7 @@ const fetchJSON = (url, cb) => {
   xhr(
     {
       json: true,
-      url
+      url,
     },
     (err, response, body) => {
       if (err) {
@@ -356,7 +386,7 @@ const fetchJSON = (url, cb) => {
 
 let areDependenciesLoaded;
 
-const loadDependencies = cb =>
+const loadDependencies = (cb) =>
   areDependenciesLoaded
     ? cb()
     : loadScript(JS_LEAFLET, () => {

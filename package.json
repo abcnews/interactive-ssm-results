@@ -8,23 +8,25 @@
     "Colin Gourlay <Gourlay.Colin@abc.net.au>",
     "Andrew Kesper <Kesper.Andrew@abc.net.au>"
   ],
-  "aunty": "react-app",
+  "aunty": "react",
   "scripts": {
     "start": "aunty serve"
   },
   "devDependencies": {
-    "@abcnews/aunty": "^7.1.2"
+    "@abcnews/aunty": "^13.2.2"
   },
   "dependencies": {
+    "@abcnews/env-utils": "^3.1.0",
+    "@abcnews/mount-utils": "^2.0.0",
     "array-unique": "^0.3.2",
     "classnames": "^2.2.5",
     "debounce": "^1.1.0",
     "google-spreadsheet-to-json": "^1.0.0",
     "load-script": "^1.0.0",
     "prop-types": "^15.6.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-sticky": "^6.0.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-sticky": "^6.0.3",
     "xhr": "^2.4.0"
   }
 }

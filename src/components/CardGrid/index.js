@@ -1,7 +1,7 @@
 const React = require('react');
 const { track } = require('../../util');
 const Card = require('../Card');
-const styles = require('./styles.scss');
+const styles = require('./styles.scss').default;
 
 const PER_ROW = 2;
 
@@ -10,10 +10,10 @@ class CardGrid extends React.Component {
     super(props);
 
     const hash = window.location.hash.split('#');
-    const ids = this.props.cards.map(card => card.id);
+    const ids = this.props.cards.map((card) => card.id);
 
     this.state = {
-      openId: hash in ids ? hash : null
+      openId: hash in ids ? hash : null,
     };
   }
 
@@ -29,7 +29,7 @@ class CardGrid extends React.Component {
 
   render() {
     const cards = this.props.cards.reduce((memo, card, index) => {
-      const order = index * PER_ROW + (index + 1) % PER_ROW;
+      const order = index * PER_ROW + ((index + 1) % PER_ROW);
 
       return memo.concat([
         <Card
@@ -49,7 +49,7 @@ class CardGrid extends React.Component {
           bottom={card.bottom}
           className={styles.full}
           style={{ order: order + PER_ROW }}
-        />
+        />,
       ]);
     }, []);
 

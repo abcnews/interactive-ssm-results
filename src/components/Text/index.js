@@ -1,7 +1,7 @@
 const classNames = require('classnames/bind');
 const PropTypes = require('prop-types');
 const React = require('react');
-const styles = require('./styles.scss');
+const styles = require('./styles.scss').default;
 
 const cx = classNames.bind(styles);
 
@@ -13,9 +13,9 @@ const Text = ({ heading, headingStyle, align, nomargin, style, children }) =>
         [`h${headingStyle || heading || '_'}`]: heading,
         p: !heading,
         [align]: align,
-        nomargin
+        nomargin,
       }),
-      style
+      style,
     },
     children
   );
@@ -24,14 +24,14 @@ Text.propTypes = {
   heading: PropTypes.oneOf([null, 1, 2, 3, 4, 5, 6]),
   headingStyle: PropTypes.oneOf([null, 1, 2, 3, 4, 5, 6]),
   align: PropTypes.oneOf([null, 'left', 'right', 'center']),
-  nomargin: PropTypes.bool
+  nomargin: PropTypes.bool,
 };
 
 Text.defaultProps = {
   heading: null,
   headingStyle: null,
   align: null,
-  nomargin: false
+  nomargin: false,
 };
 
 module.exports = Text;

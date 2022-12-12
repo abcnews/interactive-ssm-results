@@ -2,7 +2,7 @@ const classNames = require('classnames/bind');
 const PropTypes = require('prop-types');
 const React = require('react');
 const { scrollToId, track } = require('../../util');
-const styles = require('./styles.scss');
+const styles = require('./styles.scss').default;
 
 const cx = classNames.bind(styles);
 
@@ -15,7 +15,7 @@ class Card extends React.Component {
     this.state = this.props.onToggle
       ? {}
       : {
-          open: false
+          open: false,
         };
   }
 
@@ -48,7 +48,7 @@ class Card extends React.Component {
           {
             topless: !this.props.top,
             bottomless: !this.props.bottom,
-            open
+            open,
           },
           this.props.className
         )}
@@ -57,27 +57,32 @@ class Card extends React.Component {
         {this.props.top && (
           <div className={styles.top}>
             {this.props.id && (
-              <button className={styles[open ? 'less' : 'more']} onClick={this.toggle}>
+              <button
+                className={styles[open ? 'less' : 'more']}
+                onClick={this.toggle}
+              >
                 {open ? 'less' : 'more'}
               </button>
             )}
-            {this.props.id && <div id={this.props.id} className={styles.deepLink} />}
+            {this.props.id && (
+              <div id={this.props.id} className={styles.deepLink} />
+            )}
             {this.props.top}
           </div>
         )}
-        {this.props.middle && open && <div className={styles.middle}>{this.props.middle}</div>}
-        {this.props.bottom &&
-          open && (
-            <div className={styles.bottom}>
-              {this.props.bottom}
-              {this.props.id &&
-                open && (
-                  <button className={styles.less} onClick={this.toggle}>
-                    less
-                  </button>
-                )}
-            </div>
-          )}
+        {this.props.middle && open && (
+          <div className={styles.middle}>{this.props.middle}</div>
+        )}
+        {this.props.bottom && open && (
+          <div className={styles.bottom}>
+            {this.props.bottom}
+            {this.props.id && open && (
+              <button className={styles.less} onClick={this.toggle}>
+                less
+              </button>
+            )}
+          </div>
+        )}
       </div>
     );
   }
@@ -91,7 +96,7 @@ Card.propTypes = {
   middle: PropTypes.node,
   bottom: PropTypes.node,
   className: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
 };
 
 Card.defaultProps = {
@@ -102,7 +107,7 @@ Card.defaultProps = {
   middle: '',
   bottom: '',
   className: '',
-  style: {}
+  style: {},
 };
 
 module.exports = Card;

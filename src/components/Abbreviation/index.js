@@ -1,6 +1,6 @@
 const PropTypes = require('prop-types');
 const React = require('react');
-const styles = require('./styles.scss');
+const styles = require('./styles.scss').default;
 
 const Abbreviation = ({ title, children }) => (
   <abbr aria-label={title} className={styles.root}>
@@ -9,11 +9,11 @@ const Abbreviation = ({ title, children }) => (
 );
 
 Abbreviation.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 Abbreviation.defaultProps = {
-  title: ''
+  title: '',
 };
 
 module.exports = Abbreviation;

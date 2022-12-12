@@ -2,13 +2,15 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const { copyTextToClipboard, track } = require('../../util');
 const Sides = require('../Sides');
-const styles = require('./styles.scss');
+const styles = require('./styles.scss').default;
 
 class Share extends React.Component {
   constructor(props) {
     super(props);
 
-    this.url = `${String(window.location).split('#')[0]}${this.props.target ? `#${this.props.target}` : ''}`;
+    this.url = `${String(window.location).split('#')[0]}${
+      this.props.target ? `#${this.props.target}` : ''
+    }`;
     this.eUrl = encodeURIComponent(this.url);
     this.eText = encodeURIComponent(this.props.text);
 
@@ -73,12 +75,12 @@ class Share extends React.Component {
 
 Share.propTypes = {
   target: PropTypes.string,
-  text: PropTypes.string
+  text: PropTypes.string,
 };
 
 Share.defaultProps = {
   target: '',
-  text: String(document.title).split(' - ABC')[0]
+  text: String(document.title).split(' - ABC')[0],
 };
 
 module.exports = Share;

@@ -1,7 +1,7 @@
 const classNames = require('classnames/bind');
 const PropTypes = require('prop-types');
 const React = require('react');
-const styles = require('./styles.scss');
+const styles = require('./styles.scss').default;
 
 const cx = classNames.bind(styles);
 
@@ -30,7 +30,7 @@ Percentage.propTypes = {
   digits: PropTypes.number,
   yes: PropTypes.bool,
   no: PropTypes.bool,
-  large: PropTypes.bool
+  large: PropTypes.bool,
 };
 
 Percentage.defaultProps = {
@@ -38,7 +38,7 @@ Percentage.defaultProps = {
   digits: 0,
   yes: false,
   no: false,
-  large: false
+  large: false,
 };
 
 module.exports = Percentage;

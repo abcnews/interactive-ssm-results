@@ -4,7 +4,7 @@ const xhr = require('xhr');
 const Divisions = require('../Divisions');
 const National = require('../National');
 const States = require('../States');
-const styles = require('./styles.scss');
+const styles = require('./styles.scss').default;
 
 class App extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class App extends React.Component {
       house: null,
       senate: null,
       mps: [],
-      senators: []
+      senators: [],
     };
 
     this.fetchData();
@@ -27,17 +27,19 @@ class App extends React.Component {
   fetchData() {
     xhr({ json: true, url: this.props.dataURL }, (err, response, body) => {
       if (!err) {
-        const national = body[0].filter(x => x.electorate_level === 'national')[0];
+        const national = body[0].filter(
+          (x) => x.electorate_level === 'national'
+        )[0];
 
         this.setState({
           result: national.result,
           national,
-          states: body[0].filter(x => x.electorate_level === 'state'),
-          divisions: body[0].filter(x => x.electorate_level === 'division'),
+          states: body[0].filter((x) => x.electorate_level === 'state'),
+          divisions: body[0].filter((x) => x.electorate_level === 'division'),
           house: body[1][0],
           senate: body[1][1],
-          mps: body[2].filter(x => x.house_id === 'r'),
-          senators: body[2].filter(x => x.house_id === 's')
+          mps: body[2].filter((x) => x.house_id === 'r'),
+          senators: body[2].filter((x) => x.house_id === 's'),
         });
       }
     });
@@ -52,15 +54,22 @@ class App extends React.Component {
           house={this.state.house}
           senate={this.state.senate}
         />
-        <States electorates={this.state.states} senators={this.state.senators} />
-        <Divisions result={this.state.result} electorates={this.state.divisions} mps={this.state.mps} />
+        <States
+          electorates={this.state.states}
+          senators={this.state.senators}
+        />
+        <Divisions
+          result={this.state.result}
+          electorates={this.state.divisions}
+          mps={this.state.mps}
+        />
       </div>
     );
   }
 }
 
 App.propTypes = {
-  dataURL: PropTypes.string.isRequired
+  dataURL: PropTypes.string.isRequired,
 };
 
 module.exports = App;

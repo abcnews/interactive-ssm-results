@@ -1,5 +1,5 @@
 const React = require('react');
-const styles = require('./styles.scss');
+const styles = require('./styles.scss').default;
 
 const Sides = ({ children }) => <div className={styles.root}>{children}</div>;
 
@@ -8,7 +8,7 @@ Sides.propTypes = {
     if (props.children && props.children.length !== 2) {
       return new Error(`${componentName} can only have two children.`);
     }
-  }
+  },
 };
 
 module.exports = Sides;

@@ -8,5 +8,5 @@ $color-shape-yes: #ff7926;
 $color-shape-no: #60c5db;
 $color-shape-other: #757575;
 
-$mq-sm: (max-width: 43.75rem);
-$mq-not-sm: (min-width: 43.75rem);
+$mq-sm: "(max-width: 43.75rem)";
+$mq-not-sm: "(min-width: 43.75rem)";

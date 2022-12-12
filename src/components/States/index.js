@@ -11,42 +11,51 @@ const Turnout = require('../Turnout');
 
 const States = ({ electorates, senators }) => (
   <CardGrid
-    cards={electorates.map(electorate => ({
+    cards={electorates.map((electorate) => ({
       id: electorate.electorate_id,
       top: [
         <Text key="heading" heading={4} nomargin>
-          <Abbreviation title={electorate.electorate_name}>{electorate.electorate_name_short}</Abbreviation>
+          <Abbreviation title={electorate.electorate_name}>
+            {electorate.electorate_name_short}
+          </Abbreviation>
         </Text>,
-        <Count key="count" electorate={electorate} bar percentage />
+        <Count key="count" electorate={electorate} bar percentage />,
       ],
       middle: <Count electorate={electorate} integer />,
       bottom: [
         <Share
           key="share"
           target={electorate.electorate_id}
-          text={shareText(colloquial(electorate.electorate_name, true), electorate.response_yes_percentage)}
+          text={shareText(
+            colloquial(electorate.electorate_name, true),
+            electorate.response_yes_percentage
+          )}
         />,
         <Turnout key="turnout" electorate={electorate} />,
         <Text key="heading" heading={4} align="center">
-          {`Which ${adjective(electorate.electorate_name)} senators are likely to support same-sex marriage?`}
+          {`Which ${adjective(
+            electorate.electorate_name
+          )} senators are likely to support same-sex marriage?`}
         </Text>,
         <PoliticianGrid
           key="senators"
-          politicians={senators.filter(x => x.electorate_id === electorate.electorate_id)}
-        />
-      ]
+          politicians={senators.filter(
+            (x) => x.electorate_id === electorate.electorate_id
+          )}
+        />,
+      ],
     }))}
   />
 );
 
 States.propTypes = {
   electorates: PropTypes.arrayOf(PropTypes.object).isRequired,
-  senators: PropTypes.arrayOf(PropTypes.object).isRequired
+  senators: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 States.defaultProps = {
   electorate: [{}],
-  senators: [{}]
+  senators: [{}],
 };
 
 module.exports = States;

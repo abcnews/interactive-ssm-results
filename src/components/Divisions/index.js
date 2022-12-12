@@ -12,7 +12,7 @@ const Share = require('../Share');
 const Sides = require('../Sides');
 const Text = require('../Text');
 const Turnout = require('../Turnout');
-const styles = require('./styles.scss');
+const styles = require('./styles.scss').default;
 
 const cx = classNames.bind(styles);
 
@@ -20,9 +20,14 @@ const ATOZ = 'Alphabetically';
 const YES = 'High to low yes response';
 const NO = 'High to low no response';
 const ORDERINGS = {
-  [ATOZ]: (a, b) => (a.electorate_id < b.electorate_id ? -1 : a.electorate_id > b.electorate_id ? 1 : 0),
+  [ATOZ]: (a, b) =>
+    a.electorate_id < b.electorate_id
+      ? -1
+      : a.electorate_id > b.electorate_id
+      ? 1
+      : 0,
   [YES]: (a, b) => b.response_yes_percentage - a.response_yes_percentage,
-  [NO]: (a, b) => a.response_yes_percentage - b.response_yes_percentage
+  [NO]: (a, b) => a.response_yes_percentage - b.response_yes_percentage,
 };
 
 class Divisions extends React.Component {
@@ -30,7 +35,7 @@ class Divisions extends React.Component {
     super(props);
 
     this.state = {
-      order: null
+      order: null,
     };
 
     this.reorder = this.reorder.bind(this);
@@ -62,7 +67,7 @@ class Divisions extends React.Component {
 
   componentWillReceiveProps(props) {
     this.setState({
-      order: props.result === 'y' ? YES : NO
+      order: props.result === 'y' ? YES : NO,
     });
   }
 
@@ -75,13 +80,18 @@ class Divisions extends React.Component {
             {({ isSticky, wasSticky, calculatedHeight, style }) => {
               // Interaction with Odyssey Nav-bar
               if (isSticky !== wasSticky) {
-                document.documentElement.classList[isSticky ? 'add' : 'remove'](cx('has-sticky'));
+                document.documentElement.classList[isSticky ? 'add' : 'remove'](
+                  cx('has-sticky')
+                );
               }
 
               this.headerHeight = calculatedHeight;
 
               return (
-                <div className={cx('header', { sticky: isSticky })} style={style}>
+                <div
+                  className={cx('header', { sticky: isSticky })}
+                  style={style}
+                >
                   <div className={cx('header-inner')}>
                     <Text heading={3} nomargin>
                       Electorates
@@ -93,8 +103,15 @@ class Divisions extends React.Component {
                     />
                     <div className={styles.controls}>
                       <Sides>
-                        <Select value={this.state.order} options={Object.keys(ORDERINGS)} onChange={this.reorder} />
-                        <button className={styles.top} onClick={this.scrollToTop}>
+                        <Select
+                          value={this.state.order}
+                          options={Object.keys(ORDERINGS)}
+                          onChange={this.reorder}
+                        />
+                        <button
+                          className={styles.top}
+                          onClick={this.scrollToTop}
+                        >
                           Go to top
                         </button>
                       </Sides>
@@ -108,7 +125,7 @@ class Divisions extends React.Component {
             {[]
               .concat(this.props.electorates)
               .sort(ORDERINGS[this.state.order])
-              .map(electorate => (
+              .map((electorate) => (
                 <Card
                   key={electorate.electorate_id}
                   id={electorate.electorate_id}
@@ -117,10 +134,20 @@ class Divisions extends React.Component {
                       {electorate.electorate_name}
                       <small>{electorate.state_name}</small>
                     </Text>,
-                    <Count key="count" electorate={electorate} bar percentage />
+                    <Count
+                      key="count"
+                      electorate={electorate}
+                      bar
+                      percentage
+                    />,
                   ]}
                   bottom={[
-                    <Count key="count" electorate={electorate} integer units={'responses'} />,
+                    <Count
+                      key="count"
+                      electorate={electorate}
+                      integer
+                      units={'responses'}
+                    />,
                     <Share
                       key="share"
                       target={electorate.electorate_id}
@@ -134,9 +161,13 @@ class Divisions extends React.Component {
                     </Text>,
                     <Politician
                       key="mp"
-                      politician={this.props.mps.filter(x => x.electorate_id === electorate.electorate_id).pop()}
+                      politician={this.props.mps
+                        .filter(
+                          (x) => x.electorate_id === electorate.electorate_id
+                        )
+                        .pop()}
                     />,
-                    <Turnout key="turnout" electorate={electorate} />
+                    <Turnout key="turnout" electorate={electorate} />,
                   ]}
                 />
               ))}
@@ -150,13 +181,13 @@ class Divisions extends React.Component {
 Divisions.propTypes = {
   result: PropTypes.string,
   electorates: PropTypes.arrayOf(PropTypes.object),
-  mps: PropTypes.arrayOf(PropTypes.object)
+  mps: PropTypes.arrayOf(PropTypes.object),
 };
 
 Divisions.defaultProps = {
   result: '',
   electorates: [],
-  mps: []
+  mps: [],
 };
 
 module.exports = Divisions;

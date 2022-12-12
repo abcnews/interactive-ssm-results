@@ -1,25 +1,24 @@
+const { whenOdysseyLoaded } = require('@abcnews/env-utils');
+const { getMountValue, selectMounts } = require('@abcnews/mount-utils');
 const React = require('react');
 const { render } = require('react-dom');
+const App = require('./components/App');
 require('./global.scss');
 
-const PROJECT_NAME = 'interactive-ssm-results';
-const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
-const dataURL = root.getAttribute('data-url');
+whenOdysseyLoaded.then(() => {
+  const [rootEl] = selectMounts('ssm');
 
-function init() {
-  const App = require('./components/App');
-  render(<App dataURL={dataURL} />, root);
-}
+  if (!rootEl) {
+    return;
+  }
 
-init();
+  const [, ...dataURLParts] = getMountValue(rootEl).split(':');
 
-if (module.hot) {
-  module.hot.accept('./components/App', () => {
-    try {
-      init();
-    } catch (err) {
-      const ErrorBox = require('./components/ErrorBox');
-      render(<ErrorBox error={err} />, root);
-    }
-  });
-}
+  if (dataURLParts.length < 2) {
+    return;
+  }
+
+  const dataURL = `https://www.abc.net.au/dat/${dataURLParts.join('/')}.json`;
+
+  render(<App dataURL={dataURL} />, rootEl);
+});
