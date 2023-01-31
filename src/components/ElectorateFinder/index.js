@@ -28,7 +28,7 @@ const LEAFLET_UNDERNEATH_LAYERS = ['ssm-2017-electorates-ao2dkw'];
 const LEAFLET_UNDERNEATH_QUERY_OPTIONS = { onlyInside: true };
 const LEAFLET_UNDERNEATH_SUBDOMAINS = ['a', 'b', 'c', 'd'];
 const MAPBOX_ACCESS_TOKEN =
-  'pk.eyJ1IjoibmV3cy1vbjFpbmUiLCJhIjoiR3FlZFZlVSJ9._30EFE9XYhQitqf4gzRG-g';
+  'pk.eyJ1IjoibmV3cy1vbjFpbmUiLCJhIjoiY2tkZTFwbGl5MWRtOTM0anFtNjlmb2x2dCJ9.Dxh6oXw1urTy4AW7MYQ7HQ';
 const MAPBOX_GEOCODING_TYPES_ADDRESS = 'address,neighborhood,locality,place';
 const MAPBOX_GEOCODING_TYPES_POSTCODE = 'postcode';
 const MAPBOX_GEOCODING_URL_ROOT =
